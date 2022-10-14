@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  db:
+    container_name: postgres_containter
+    image: postgres:14
+    env_file: ./.env
+    restart: unless-stopped
+    ports:
+      - $POSTGRES_PORT:5432
+    volumes:
+      - ./database/initial_scripts:/docker-entrypoint-initdb.d
+      - ./database/postgres_data:/var/lib/postgresql/data
+    networks:
+      - dbnetwork
+
+
+  adminer: # when connect to db in server field write database service name, in this docker-compose it is "db"
+    container_name: adminer_container
+    image: adminer
+    restart: always
+    ports:
+      - $ADMINER_PORT:8080
+    networks:
+      - dbnetwork
+    environment:
+      - ADMINER_DEFAULT_SERVER=db
+      - ADMINER_DEFAULT_DATABASE=$POSTGRES_DB # It should work but I am not sure
+
+
+  # app:
+
+
+
+
+networks:
+  dbnetwork:
