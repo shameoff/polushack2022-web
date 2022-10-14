@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">PolusHackathonProject</string>
+    <string name="login">Логин</string>
+    <string name="password">Пароль</string>
+    <string name="signup">Войти</string>
     <string name="pictureContentDescription">picture</string>
 </resources>
