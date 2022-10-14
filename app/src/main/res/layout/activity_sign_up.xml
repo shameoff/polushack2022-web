@@ -13,61 +13,77 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
+
         <ImageView
+            android:id="@+id/logoImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/pictureContentDescription"
             android:background="@drawable/signup_logo_digital"
-            android:layout_gravity="center"/>
+            tools:ignore="ImageContrastCheck" />
     </FrameLayout>
 
     <LinearLayout
-        android:layout_weight="1"
-        android:weightSum="1"
+        android:id="@+id/signLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/signup_background"
         android:orientation="vertical"
-        android:background="@drawable/signup_background">
+        android:weightSum="1">
+
         <EditText
-            android:id="@+id/login_edittext"
+            android:id="@+id/loginEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/signup_input_field"
             android:hint="@string/login"
-            android:textColorHint="@color/hint"
+            android:importantForAutofill="no"
+            android:inputType="textWebEmailAddress"
             android:textColor="@color/text"
-            android:layout_marginTop="48dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"/>
+            android:textColorHint="@color/hint"
+            tools:ignore="TextContrastCheck" />
+
         <EditText
-            android:id="@+id/password_edittext"
+            android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/signup_input_field"
-            android:hint="@string/password"
-            android:textColor="@color/text"
-            android:textColorHint="@color/hint"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="32dp"/>
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/signup_input_field"
+            android:hint="@string/password"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:textColor="@color/text"
+            android:textColorHint="@color/hint"
+            tools:ignore="TextContrastCheck" />
+
         <FrameLayout
-            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_weight="1"
             tools:ignore="NestedWeights">
+
             <Button
                 android:id="@+id/signup_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/signup"
-                android:textSize="24sp"
-                android:textColor="@color/white"
-                android:textAllCaps="false"
+                android:layout_gravity="bottom"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="32dp"
-                android:layout_gravity="bottom"
-                android:background="@drawable/signup_button"/>
+                android:background="@drawable/signup_button"
+                android:text="@string/signup"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                tools:ignore="TextContrastCheck" />
         </FrameLayout>
     </LinearLayout>
 </LinearLayout>
