@@ -23,7 +23,7 @@ class LaunchActivity : AppCompatActivity() {
         binding.logoImageView.animate().rotation(720f).setDuration(1500).start()
 
         CoroutineScope(Dispatchers.Main).launch {
-            delay(2000)
+            delay(1600)
             makeIntent(false)
             finish()
         }
