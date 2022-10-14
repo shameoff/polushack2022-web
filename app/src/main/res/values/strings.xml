@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PolusHackathonProject</string>
+    <string name="pictureContentDescription">picture</string>
 </resources>
