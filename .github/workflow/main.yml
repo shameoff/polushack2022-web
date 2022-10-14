@@ -1,0 +1,25 @@
+name: deploy-with-docker-compose
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            cd /projects/polushack2022-web
+            echo "Hi! There is 'echo' comand Hi for you from building docker-compose of your project!"
+            # Write here your job when deploy on main
+            docker-compose up --build --force-recreate 
