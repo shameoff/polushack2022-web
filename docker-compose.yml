@@ -11,6 +11,7 @@ services:
     volumes:
       - ./database/initial_scripts:/docker-entrypoint-initdb.d
       - ./database/postgres_data:/var/lib/postgresql/data
+      - ./database/src:/src:rw
     networks:
       - dbnetwork
 
