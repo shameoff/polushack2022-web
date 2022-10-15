@@ -2,7 +2,6 @@ package com.example.polushackhatonproject.presentation.signup
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.polushackhatonproject.data.repository.UserAuthentificationRepositoryImpl
 import com.example.polushackhatonproject.domain.signup.model.UserCredits
@@ -13,8 +12,7 @@ import com.example.polushackhatonproject.domain.signup.validator.SignUpValidator
 
 class SignUpActivityViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val validationResultLive: MutableLiveData<ValidatorResult> = MutableLiveData()
-    val validatorResult: LiveData<ValidatorResult> = validationResultLive
+    private val validationResultLiveData = MutableLiveData<ValidatorResult>()
 
     private val userAuthentificationRepositoryImpl by lazy {
         UserAuthentificationRepositoryImpl(application.applicationContext)
@@ -35,13 +33,18 @@ class SignUpActivityViewModel(application: Application) : AndroidViewModel(appli
         )
     }
 
-    fun checkEntryDataValidity(email: String, password: String){
-        var res = validateEntryDataUseCase.execute(ValidatorData(email, password))
-        if(res.emailErrId == null && res.passwordErrId == null) {
+    fun checkEntryDataValidity(email: String, password: String) {
+        val res = validateEntryDataUseCase.execute(ValidatorData(email, password))
+        if (res.emailResulId == null && res.passwordResultId == null) {
             // TODO:: add validation in server
         }
-        validationResultLive.value = res
+        validationResultLiveData.value = res
     }
+
+    fun getValidationResultLiveData(): MutableLiveData<ValidatorResult> {
+        return validationResultLiveData
+    }
+
 
 
 }

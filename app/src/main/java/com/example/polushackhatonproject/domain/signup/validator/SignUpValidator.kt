@@ -7,8 +7,8 @@ import com.example.polushackhatonproject.domain.signup.model.ValidatorResult
 class SignUpValidator {
     fun validate(data: ValidatorData): ValidatorResult{
         return ValidatorResult(
-            emailErrId = checkEmail(data.email),
-            passwordErrId = checkPassword(data.password)
+            emailResulId = checkEmail(data.email),
+            passwordResultId = checkPassword(data.password)
         )
     }
 

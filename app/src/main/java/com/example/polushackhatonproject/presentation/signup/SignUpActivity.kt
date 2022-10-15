@@ -28,9 +28,38 @@ class SignUpActivity : AppCompatActivity() {
         binding.passwordEditText.addTextChangedListener { updateButton() }
 
         updateButton()
+        onSignUpButtonClick()
 
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private fun updateButton() {
+        if (checkEmptyFieldsExisting()) {
+            binding.signupButton.background = resources.getDrawable(
+                R.drawable.signup_unlocked_button,
+                this.theme
+            )
+
+            binding.signupButton.setTextColor(resources.getColor(R.color.hint, this.theme))
+            binding.signupButton.isClickable = false
+        } else {
+            binding.signupButton.background = resources.getDrawable(
+                R.drawable.signup_locked_button,
+                this.theme
+            )
+
+            binding.signupButton.setTextColor(resources.getColor(R.color.white, this.theme))
+            binding.signupButton.isClickable = true
+        }
+    }
+
+    private fun onSignUpButtonClick() {
         binding.signupButton.setOnClickListener {
-            if(!isHaveEmptyInputField() && isValidEntryData()) {
+            if (!checkEmptyFieldsExisting() && isEntryDataValid()) {
+                viewModel.saveUserCreditsToLocalStorage(
+                    binding.loginEditText.text.toString(),
+                    binding.passwordEditText.text.toString()
+                )
                 CoroutineScope(Dispatchers.Main).launch {
                     createAnimationOnButtonClick()
                     startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
@@ -40,50 +69,35 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    private fun isHaveEmptyInputField(): Boolean {
+
+    private fun checkEmptyFieldsExisting(): Boolean {
         return binding.loginEditText.text.isEmpty() || binding.passwordEditText.text.isEmpty()
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
-    private fun updateButton() {
-        if(isHaveEmptyInputField()) {
-            binding.signupButton.background = resources.getDrawable(R.drawable.signup_unlocked_button)
-            binding.signupButton.setTextColor(resources.getColor(R.color.hint))
-            binding.signupButton.isClickable = false
-        }
-        else {
-            binding.signupButton.background = resources.getDrawable(R.drawable.signup_locked_button)
-            binding.signupButton.setTextColor(resources.getColor(R.color.white))
-            binding.signupButton.isClickable = true
-        }
-    }
-
-    private fun isValidEntryData(): Boolean {
+    private fun isEntryDataValid(): Boolean {
         var result = true
+
         val email = binding.loginEditText.text.toString()
         val password = binding.passwordEditText.text.toString()
+
         viewModel.checkEntryDataValidity(email, password)
-        val validationResult = viewModel.validatorResult.value!!
-        if(validationResult.passwordErrId != null) {
-            result = false
-            binding.passwordErrorTextView.text =
-                resources.getString(validationResult.passwordErrId)
+        viewModel.getValidationResultLiveData().observe(this) {
+            if (it.passwordResultId != null) {
+                result = false
+                binding.passwordErrorTextView.text = resources.getString(it.passwordResultId)
+            } else {
+                binding.passwordErrorTextView.text = ""
+            }
+            if (it.emailResulId != null) {
+                result = false
+                binding.loginErrorTextView.text = resources.getString(it.emailResulId)
+            } else {
+                binding.loginErrorTextView.text = ""
+            }
         }
-        else {
-            binding.passwordErrorTextView.text = ""
-        }
-        if(validationResult.emailErrId != null) {
-            result = false
-            binding.loginErrorTextView.text =
-                resources.getString(validationResult.emailErrId)
-        }
-        else {
-            binding.loginErrorTextView.text = ""
-        }
+
         return result
     }
-
-
 
     private suspend fun createAnimationOnButtonClick() {
         binding.logoImageView

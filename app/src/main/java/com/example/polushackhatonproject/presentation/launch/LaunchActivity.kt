@@ -40,7 +40,7 @@ class LaunchActivity : AppCompatActivity() {
 
     private fun makeIntent(checkIfAuthenticationPassed: Boolean) {
         if (checkIfAuthenticationPassed) {
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this@LaunchActivity, MainActivity::class.java))
             finish()
         } else {
             startActivity(Intent(this@LaunchActivity, SignUpActivity::class.java))
