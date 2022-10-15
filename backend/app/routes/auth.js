@@ -5,7 +5,7 @@ import authMiddleware from '../middlewares/auth.middleware.js';
 import isObjectEmpty from '../utils/isObjectEmpty.js';
 
 const authRouter = Router();
-authRouter.use(authMiddleware);
+// authRouter.use(authMiddleware);
 authRouter.post(
   '/user/register',
   [
