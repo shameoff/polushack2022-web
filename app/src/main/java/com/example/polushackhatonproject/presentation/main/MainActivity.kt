@@ -6,9 +6,9 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.example.polushackhatonproject.R
 import com.example.polushackhatonproject.databinding.ActivityMainBinding
-import com.example.polushackhatonproject.presentation.main.fragment.MapFragment
-import com.example.polushackhatonproject.presentation.main.fragment.ProfileFragment
 import com.example.polushackhatonproject.presentation.main.fragment.TaskFragment
+import com.example.polushackhatonproject.presentation.main.fragment.ProfileFragment
+import com.example.polushackhatonproject.presentation.main.fragment.MapFragment
 import com.example.polushackhatonproject.presentation.main.history.HistoryFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        MapKitFactory.setApiKey(TaskFragment.MAPS_API_KEY)
+        MapKitFactory.setApiKey(MapFragment.MAPS_API_KEY)
         MapKitFactory.initialize(this)
 
         setContentView(binding.root)
@@ -79,14 +79,14 @@ class MainActivity : AppCompatActivity() {
     private fun replaceTaskFragment() {
         supportFragmentManager.commit {
             setReorderingAllowed(true)
-            replace<TaskFragment>(R.id.fragmentContainerView)
+            replace<MapFragment>(R.id.fragmentContainerView)
         }
     }
 
     private fun replaceMapFragment() {
         supportFragmentManager.commit {
             setReorderingAllowed(true)
-            replace<MapFragment>(R.id.fragmentContainerView)
+            replace<TaskFragment>(R.id.fragmentContainerView)
         }
     }
 }

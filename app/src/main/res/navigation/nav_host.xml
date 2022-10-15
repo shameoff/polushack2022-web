@@ -31,9 +31,9 @@
     </fragment>
     <fragment
         android:id="@+id/taskFragment"
-        android:name="com.example.polushackhatonproject.presentation.main.fragment.TaskFragment"
+        android:name="com.example.polushackhatonproject.presentation.main.fragment.MapFragment"
         android:label="fragment_task"
-        tools:layout="@layout/fragment_task" >
+        tools:layout="@layout/fragment_map" >
         <action
             android:id="@+id/action_taskFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
