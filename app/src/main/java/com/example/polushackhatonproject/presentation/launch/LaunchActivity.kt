@@ -40,8 +40,13 @@ class LaunchActivity : AppCompatActivity() {
 
     private fun makeIntent(checkIfAuthenticationPassed: Boolean) {
         if (checkIfAuthenticationPassed) {
-            startActivity(Intent(this@LaunchActivity, MainActivity::class.java))
+            // TODO: del code for test and uncommitted main code
+            // for test
+            startActivity(Intent(this, SignUpActivity::class.java))
             finish()
+            // main code
+            //startActivity(Intent(this@LaunchActivity, MainActivity::class.java))
+            //finish()
         } else {
             startActivity(Intent(this@LaunchActivity, SignUpActivity::class.java))
             finish()

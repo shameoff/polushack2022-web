@@ -1,16 +1,14 @@
 package com.example.polushackhatonproject.presentation.signup
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import com.example.polushackhatonproject.R
 import com.example.polushackhatonproject.databinding.ActivitySignUpBinding
 import com.example.polushackhatonproject.presentation.main.MainActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -26,50 +24,75 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        onSignUpButtonClick()
-    }
+        binding.loginEditText.addTextChangedListener { updateButton() }
+        binding.passwordEditText.addTextChangedListener { updateButton() }
 
-    private fun onSignUpButtonClick() {
+        updateButton()
+
         binding.signupButton.setOnClickListener {
-            val email = binding.loginEditText.text.toString()
-            val password = binding.passwordEditText.text.toString()
-
-            if (checkIsEntryDataValid()) {
-                viewModel.saveUserCreditsToLocalStorage(email, password)
+            if(!isHaveEmptyInputField() && isValidEntryData()) {
                 createAnimationOnButtonClick()
-            } else {
-                val stringId = viewModel.checkEntryDataValidity(email, password)
-                Toast.makeText(
-                    this,
-                    resources.getString(stringId),
-                    Toast.LENGTH_SHORT
-                ).show()
+                startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
+                finish()
             }
         }
     }
 
-    private fun checkIsEntryDataValid(): Boolean {
-        val email = binding.loginEditText.text.toString()
-        val password = binding.passwordEditText.text.toString()
-
-        return viewModel.checkEntryDataValidity(email, password) == R.string.data_is_valid
-
+    private fun isHaveEmptyInputField(): Boolean {
+        return binding.loginEditText.text.isEmpty() || binding.passwordEditText.text.isEmpty()
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private fun updateButton() {
+        if(isHaveEmptyInputField()) {
+            binding.signupButton.background = resources.getDrawable(R.drawable.signup_unlocked_button)
+            binding.signupButton.setTextColor(resources.getColor(R.color.hint))
+            binding.signupButton.isClickable = false
+        }
+        else {
+            binding.signupButton.background = resources.getDrawable(R.drawable.signup_locked_button)
+            binding.signupButton.setTextColor(resources.getColor(R.color.white))
+            binding.signupButton.isClickable = true
+        }
+    }
+
+    private fun isValidEntryData(): Boolean {
+        var result = true
+        val email = binding.loginEditText.text.toString()
+        val password = binding.passwordEditText.text.toString()
+        viewModel.checkEntryDataValidity(email, password)
+        val validationResult = viewModel.validatorResult.value!!
+        if(validationResult.passwordErrId != null) {
+            result = false
+            binding.passwordErrorTextView.text =
+                resources.getString(validationResult.passwordErrId)
+        }
+        else {
+            binding.passwordErrorTextView.text = ""
+        }
+        if(validationResult.emailErrId != null) {
+            result = false
+            binding.loginErrorTextView.text =
+                resources.getString(validationResult.emailErrId)
+        }
+        else {
+            binding.loginErrorTextView.text = ""
+        }
+        return result
+    }
+
+
+
     private fun createAnimationOnButtonClick() {
-        CoroutineScope(Dispatchers.Main).launch {
+        runBlocking {
             binding.signLayout.animate().translationY(1200f).setDuration(700).start()
             delay(600)
-            binding.logoImageView.animate().rotation(720f).setDuration(600).start()
             binding.logoImageView
                 .animate()
-                .translationY(-500f)
-                .translationX(1500f)
+                .translationY(-1000f)
                 .setDuration(600)
                 .start()
             delay(600)
-            startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
-            finish()
         }
     }
 }

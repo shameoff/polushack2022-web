@@ -9,6 +9,6 @@
     <string name="pictureContentDescription">picture</string>
     <string name="email_error">Неправильный email</string>
     <string name="password_error">Неправильный пароль</string>
-    <string name="emptiness_error">Поля не должны быть пустыми</string>
+    <string name="small_password_error">Пароль должен иметь более 8 символов</string>
     <string name="data_is_valid">ok</string>
 </resources>
