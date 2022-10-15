@@ -6,12 +6,17 @@ interface UserCreditsStorage {
     companion object {
         const val EMAIL_KEY = "userEmail"
         const val PASSWORD_KEY = "userPassword"
+        const val TOKEN_KEY = "userToken"
         const val EMPTINESS_CASE = "nothing was found"
     }
 
-    fun getData(): UserCredits
+    fun getUserCredits(): UserCredits
 
     fun ifAuthenticationPassed(): Boolean
 
-    fun saveData(userCredits: UserCredits)
+    fun saveUserCredits(userCredits: UserCredits)
+
+    fun saveToken(token: String)
+
+    fun getToken(): String
 }

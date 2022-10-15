@@ -11,6 +11,10 @@ import retrofit2.http.*
 
 interface ApiService {
 
+    companion object {
+        const val BASE_URL = "baseurl"
+    }
+
     @GET("user/credits")
     fun getUserCredits(@Header("Bearer") token: String): Response<UserCreditsResponse>
 
@@ -24,10 +28,7 @@ interface ApiService {
     fun getTasksHistory(@Header("Bearer") token: String): Response<ArrayList<Task>>
 
     @POST("user")
-    fun postUserCredits(
-        @Header("Bearer") token: String,
-        @Body userCredits: UserCredits
-    ): Response<UserCreditsResponse>
+    fun postUserCredits(@Body userCredits: UserCredits): Response<UserCreditsResponse>
 
     @PUT("user/request/complete")
     fun putDoneTask(

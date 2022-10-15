@@ -25,7 +25,7 @@ class SignUpActivityViewModel(application: Application) : AndroidViewModel(appli
     }
 
     fun saveUserCreditsToLocalStorage(email: String, password: String) {
-        userAuthentificationRepositoryImpl.saveUserCredits(
+        userAuthentificationRepositoryImpl.saveLocalUserCredits(
             UserCredits(
                 email,
                 password

@@ -1,14 +1,23 @@
 package com.example.polushackhatonproject.domain.repository
 
+import com.example.polushackhatonproject.data.model.UserCreditsResponse
 import com.example.polushackhatonproject.domain.signup.model.UserCredits
+import retrofit2.Response
 
 interface UserAuthentificationRepository {
-    fun postUserCredits(userCredits: UserCredits)
 
-    fun getUserCredits(): UserCredits
+    fun postUserCredits(userCredits: UserCredits): Response<UserCreditsResponse>
 
-    fun saveUserCredits(userCredits: UserCredits)
+    fun getLocalUserCredits(): UserCredits
+
+    fun saveLocalUserCredits(userCredits: UserCredits)
 
     fun checkUserCreditsExisting(): Boolean
+
+    fun getUserCredits(token: String): Response<UserCreditsResponse>
+
+    fun saveLocalToken(token: String)
+
+    fun getLocalToken(): String
 
 }

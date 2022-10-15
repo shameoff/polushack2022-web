@@ -7,6 +7,6 @@ class SaveUserCreditsUseCase(
     private val userAuthentificationRepositoryImpl: UserAuthentificationRepositoryImpl
 ) {
     fun execute(userCredits: UserCredits) {
-        userAuthentificationRepositoryImpl.saveUserCredits(userCredits)
+        userAuthentificationRepositoryImpl.saveLocalUserCredits(userCredits)
     }
 }

@@ -21,7 +21,7 @@ class SharedPreferencesStorage(context: Context) : UserCreditsStorage {
         EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
     )
 
-    override fun getData(): UserCredits {
+    override fun getUserCredits(): UserCredits {
         return UserCredits(
             sharedPreferences.getString(
                 UserCreditsStorage.EMAIL_KEY,
@@ -42,11 +42,24 @@ class SharedPreferencesStorage(context: Context) : UserCreditsStorage {
         return result != UserCreditsStorage.EMPTINESS_CASE
     }
 
-    override fun saveData(userCredits: UserCredits) {
+    override fun saveUserCredits(userCredits: UserCredits) {
         sharedPreferences.edit()
             .putString(UserCreditsStorage.EMAIL_KEY, userCredits.email)
             .putString(UserCreditsStorage.PASSWORD_KEY, userCredits.password)
             .apply()
+    }
+
+    override fun saveToken(token: String) {
+        sharedPreferences.edit()
+            .putString(UserCreditsStorage.TOKEN_KEY, token)
+            .apply()
+    }
+
+    override fun getToken(): String {
+        return sharedPreferences.getString(
+            UserCreditsStorage.TOKEN_KEY,
+            UserCreditsStorage.EMPTINESS_CASE
+        ).toString()
     }
 
 
