@@ -6,7 +6,7 @@ import retrofit2.Response
 
 interface UserAuthentificationRepository {
 
-    fun postUserCredits(userCredits: UserCredits): Response<UserCreditsResponse>
+    suspend fun postUserCredits(userCredits: UserCredits): Response<UserCreditsResponse>
 
     fun getLocalUserCredits(): UserCredits
 
@@ -14,7 +14,7 @@ interface UserAuthentificationRepository {
 
     fun checkUserCreditsExisting(): Boolean
 
-    fun getUserCredits(token: String): Response<UserCreditsResponse>
+    suspend fun getUserCredits(token: String): Response<UserCreditsResponse>
 
     fun saveLocalToken(token: String)
 

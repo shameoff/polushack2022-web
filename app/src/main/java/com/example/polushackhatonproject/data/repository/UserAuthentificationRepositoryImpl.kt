@@ -13,7 +13,7 @@ class UserAuthentificationRepositoryImpl(context: Context) : UserAuthentificatio
     private val localStorage = SharedPreferencesStorage(context)
 
 
-    override fun postUserCredits(userCredits: UserCredits): Response<UserCreditsResponse> {
+    override suspend fun postUserCredits(userCredits: UserCredits): Response<UserCreditsResponse> {
         return NetworkService.apiService.postUserCredits(userCredits)
     }
 
@@ -29,7 +29,7 @@ class UserAuthentificationRepositoryImpl(context: Context) : UserAuthentificatio
         return localStorage.ifAuthenticationPassed()
     }
 
-    override fun getUserCredits(token: String): Response<UserCreditsResponse> {
+    override suspend fun getUserCredits(token: String): Response<UserCreditsResponse> {
         return NetworkService.apiService.getUserCredits(token)
     }
 

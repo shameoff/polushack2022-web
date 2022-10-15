@@ -25,14 +25,22 @@ class LaunchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         binding.logoImageView.animate().rotation(720f).setDuration(1500).start()
-        onObserveLiveData()
+        onObserveUserCreditsLiveData()
     }
 
-    private fun onObserveLiveData() {
-        viewModel.getLiveData().observe(this) {
+    private fun onObserveUserCreditsLiveData() {
+        viewModel.getIsUserCreditsCreatedLiveData().observe(this) {
+            if (it) {
+                onObserveTokenLiveData()
+            }
+        }
+    }
+
+    private fun onObserveTokenLiveData() {
+        viewModel.getIsTokenExpiredLiveData().observe(this) {
             CoroutineScope(Dispatchers.Main).launch {
-                delay(1600)
-                makeIntent(it)
+                delay(1500)
+                makeIntent(!it)
                 finish()
             }
         }
