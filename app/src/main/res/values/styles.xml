@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <style name="main_text_view">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="fontFamily">@font/stem_medium</item>
+    </style>
+
+    <!-- TabLayout -->
     <style name="main_tab_layout" parent="Widget.Design.TabLayout">
         <item name="tabSelectedTextColor">@color/primary</item>
         <item name="tabTextAppearance">@style/main_tab_item_text</item>
@@ -10,4 +18,5 @@
         <item name="android:textColor">@color/text</item>
         <item name="android:textSize">12sp</item>
     </style>
+
 </resources>

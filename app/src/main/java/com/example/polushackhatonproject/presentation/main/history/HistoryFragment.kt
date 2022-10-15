@@ -31,8 +31,8 @@ class HistoryFragment : Fragment() {
             TaskHistory("task", "task tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask task"),
             TaskHistory("task", "task tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask task"),
             TaskHistory("task", "task task"),
-            TaskHistory("task", "task task"),
-            TaskHistory("task", "task task"))
+            TaskHistory("task", "task tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask task"),
+            TaskHistory("task", "task tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask task"))
         val adapter = HistoryAdapter(items)
         binding.historyList.adapter = adapter
         binding.historyList.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))

@@ -4,47 +4,61 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
+    android:paddingTop="12dp"
+    android:paddingBottom="12dp">
+
+    <FrameLayout
+        android:layout_width="4dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="2dp">
+        <View
+            android:layout_width="4dp"
+            android:layout_height="4dp"
+            android:background="@drawable/history_ellipse"/>
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/bold_border"
+            android:layout_marginTop="1dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginBottom="8dp"/>
+    </FrameLayout>
+
     <LinearLayout
         android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <LinearLayout
-            android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:layout_marginEnd="4dp">
+        <TextView
+            android:id="@+id/name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <View
-                android:layout_width="4dp"
-                android:layout_height="4dp"
-                android:layout_margin="4dp"
-                android:layout_gravity="center"
-                android:background="@drawable/history_ellipse"/>
-            <TextView
-                android:id="@+id/task_name"
-                android:textSize="20sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/history"
-                android:textColor="@color/text"/>
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/stem_medium"
+            android:textColor="@color/text"/>
         <TextView
             android:id="@+id/description"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/stem_font"
             android:textColor="@color/text"
-            android:textSize="14sp"
-            android:layout_marginStart="12dp"
-            android:layout_height="wrap_content"/>
+            android:visibility="gone"/>
     </LinearLayout>
+
     <FrameLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_gravity="bottom">
         <Button
             android:id="@+id/open_description_button"
-            android:layout_width="30dp"
-            android:layout_height="18dp"
-            android:layout_marginBottom="20dp"
-            android:layout_gravity="bottom"
+            android:layout_width="20dp"
+            android:layout_height="12dp"
             android:background="@drawable/history_arrow"/>
     </FrameLayout>
 </LinearLayout>
