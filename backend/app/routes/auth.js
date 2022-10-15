@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { check } from 'express-validator';
 import authController from '../controller/auth.controller.js';
 import authMiddleware from '../middlewares/auth.middleware.js';
+import isObjectEmpty from '../utils/isObjectEmpty.js';
 
 const authRouter = Router();
 authRouter.use(authMiddleware);
@@ -15,10 +16,13 @@ authRouter.post(
     ).isLength({ min: 6, max: 70 }),
   ],
   (req, res) => {
-    if (req.query) authController.registerByRole(req, res);
-    else authController.register(req, res);
+    if (isObjectEmpty(req.query)) authController.register(req, res);
+    else authController.registerByRole(req, res);
   },
 );
 authRouter.post('/user/login', authController.login);
+authRouter.get('/user/register', (req, res) => {
+  res.status(200).send('Redirection successful');
+});
 
 export default authRouter;

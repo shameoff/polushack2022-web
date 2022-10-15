@@ -6,17 +6,19 @@ import UnexpectedError from '../error/UnexpectedError.js';
 
 class UserService {
   async isUserExists(email) {
+    console.log(1);
     const result = await pool.query(
       `SELECT EXISTS(SELECT * FROM public.user WHERE email=$1)`,
       [email],
     );
+    console.log(2);
 
     return result.rows[0].exists;
   }
 
   async create(user) {
-    if (this.isUserExists(email))
-      throw new AlreadyExistsError(`User with email ${email} already exists`);
+    if (this.isUserExists(user.email))
+      throw new AlreadyExistsError(`User with email ${user.email} already exists`);
 
     const hash = bcrypt.hashSync(user.password, 10);
 
@@ -123,7 +125,6 @@ class UserService {
 
     return result.rows;
   }
-
 
   /**
    * 
