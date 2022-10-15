@@ -2,4 +2,5 @@ node_modules/
 .env
 */postgres_data
 */.vscode
-*/.fleet
+*/.fleetgot 
+.vscode/

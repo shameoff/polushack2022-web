@@ -4,7 +4,7 @@ import userService from './user.service.js';
 class AuthService {
   generateAccessToken(id, role) {
     const payload = { id, role };
-    return jwt.sign(payload, process.env.SECRET, { expiresIn: '14h' });
+    return jwt.sign(payload, process.env.SECRET /* , { expiresIn: '14h' } */);
   }
 
   async register(reqBody, role) {
