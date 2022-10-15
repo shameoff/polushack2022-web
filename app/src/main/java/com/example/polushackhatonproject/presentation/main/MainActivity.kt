@@ -6,9 +6,9 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.example.polushackhatonproject.R
 import com.example.polushackhatonproject.databinding.ActivityMainBinding
-import com.example.polushackhatonproject.presentation.main.fragment.TaskFragment
-import com.example.polushackhatonproject.presentation.main.fragment.ProfileFragment
 import com.example.polushackhatonproject.presentation.main.fragment.MapFragment
+import com.example.polushackhatonproject.presentation.main.fragment.ProfileFragment
+import com.example.polushackhatonproject.presentation.main.fragment.TaskFragment
 import com.example.polushackhatonproject.presentation.main.history.HistoryFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
@@ -30,8 +30,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onTabSelect() {
-        binding.tabLayout.getTabAt(2)?.select()
-
         binding.tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 when (tab.position) {
@@ -60,6 +58,7 @@ class MainActivity : AppCompatActivity() {
             override fun onTabReselected(tab: TabLayout.Tab?) {
             }
         })
+        binding.tabLayout.getTabAt(2)?.select()
     }
 
     private fun replaceHistoryFragment() {
