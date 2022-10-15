@@ -1,6 +1,7 @@
 import { validationResult } from 'express-validator';
 import authService from '../service/auth.service.js';
 import HttpStatus from '../utils/HttpStatus.js';
+import responseWithError from '../utils/responseWithError.js';
 import Role from '../utils/Role.js';
 
 class AuthController {
@@ -18,9 +19,10 @@ class AuthController {
       this._checkValidationResult(req, res);
 
       const user = await authService.register(req.body);
+
       res.status(HttpStatus.CREATED).send(user);
     } catch (err) {
-      res.status(err.statusCode).send(err.message);
+      responseWithError(res, err);
     }
   }
 
@@ -28,12 +30,12 @@ class AuthController {
     try {
       this._checkValidationResult(req, res);
 
-      const role = Role[req.query.role.toLowerCase()];
+      const role = Role.getRoleByName(req.query.role.toLowerCase());
       const user = await authService.register(req.body, role);
 
       res.status(HttpStatus.CREATED).send(user);
     } catch (err) {
-      res.status(err.statusCode).send(err.message);
+      responseWithError(res, err);
     }
   }
 
@@ -43,7 +45,7 @@ class AuthController {
       const token = await authService.login(req.body);
       res.status(HttpStatus.ACCEPTED).send(token);
     } catch (err) {
-      res.status(err.statusCode).send(err.message);
+      responseWithError(res, err);
     }
   }
 

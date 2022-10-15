@@ -1,10 +1,11 @@
+import { Router } from 'express';
 import { check } from 'express-validator';
-import app from '../app.js';
 import authController from '../controller/auth.controller.js';
 import authMiddleware from '../middlewares/auth.middleware.js';
 
-app.use(authMiddleware);
-app.post(
+const authRouter = Router();
+authRouter.use(authMiddleware);
+authRouter.post(
   '/user/register',
   [
     check('email', "Email can't be empty").notEmpty(),
@@ -18,6 +19,6 @@ app.post(
     else authController.register(req, res);
   },
 );
-app.post('/user/login', authController.login);
+authRouter.post('/user/login', authController.login);
 
-export default app;
+export default authRouter;
