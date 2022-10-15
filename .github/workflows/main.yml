@@ -20,6 +20,9 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             cd /projects/polushack2022-web
-            echo "Hi! There is 'echo' comand Hi for you from building docker-compose of your project!"
-            # Write here your job when deploy on main
+            echo "Pulling from Git..."
+            git checkout main
+            git pull
+            echo "Pulling completed. Starting docker"
             docker-compose up --build --force-recreate -d
+            echo "Containers started. Now you can check if something went wrong via ssh connection to your server"
