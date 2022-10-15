@@ -17,15 +17,24 @@ class LaunchActivity : AppCompatActivity() {
         ActivityLaunchBinding.inflate(this.layoutInflater)
     }
 
+    private val viewModel by lazy {
+        LaunchActivityViewModel(this.application)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         binding.logoImageView.animate().rotation(720f).setDuration(1500).start()
+        onObserveLiveData()
+    }
 
-        CoroutineScope(Dispatchers.Main).launch {
-            delay(1600)
-            makeIntent(false)
-            finish()
+    private fun onObserveLiveData() {
+        viewModel.getLiveData().observe(this) {
+            CoroutineScope(Dispatchers.Main).launch {
+                delay(1600)
+                makeIntent(it)
+                finish()
+            }
         }
     }
 
