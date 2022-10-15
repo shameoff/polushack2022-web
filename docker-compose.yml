@@ -28,7 +28,16 @@ services:
       - ADMINER_DEFAULT_DATABASE=$POSTGRES_DB # It should work but I am not sure
 
 
-  # app:
+  app:
+    container_name: server_container
+    build:
+      context: ./backend
+    env_file: ./.env
+    ports:
+      - $BACKEND_SERVER_PORT:$BACKEND_SERVER_PORT
+    restart: always
+    networks:
+      - dbnetwork
 
 
 
