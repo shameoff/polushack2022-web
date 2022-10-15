@@ -16,4 +16,5 @@
     <color name="border">#c2c2c2</color>
     <color name="hint">#858585</color>
     <color name="text">#454646</color>
+    <color name="status_bar">#454646</color>
 </resources>
