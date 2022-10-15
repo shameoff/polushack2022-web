@@ -1,19 +1,18 @@
 package com.example.polushackhatonproject.data.service
 
-import com.example.polushackhatonproject.data.model.TaskResponse
-import com.example.polushackhatonproject.data.model.UserDataResponse
-import com.example.polushackhatonproject.domain.signup.model.UserCredits
-import com.skydoves.sandwich.ApiResponse
-import retrofit2.http.Body
+import com.example.polushackhatonproject.data.model.UserCreditsResponse
+import com.example.polushackhatonproject.data.model.UserProfileDataResponse
+import retrofit2.Response
 import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.Header
 
 interface ApiService {
 
-    @POST("user/?role")
-    fun getUserData(@Body userCredits: UserCredits): ApiResponse<UserDataResponse>
+    @GET("user/credits")
+    fun getUserCredits(@Header("Bearer") token: String): Response<UserCreditsResponse>
 
-    @GET("request/:id")
-    fun getTask(): ApiResponse<TaskResponse>
+    @GET("user/profile")
+    fun getUserProfileData(@Header("Bearer") token: String): Response<UserProfileDataResponse>
+
 
 }

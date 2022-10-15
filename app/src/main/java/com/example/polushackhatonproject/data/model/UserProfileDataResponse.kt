@@ -2,7 +2,7 @@ package com.example.polushackhatonproject.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class UserDataResponse(
+data class UserProfileDataResponse(
     @SerializedName("name")
     var name: String = "",
     @SerializedName("last_name")
