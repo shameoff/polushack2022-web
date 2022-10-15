@@ -31,9 +31,11 @@ class SignUpActivity : AppCompatActivity() {
 
         binding.signupButton.setOnClickListener {
             if(!isHaveEmptyInputField() && isValidEntryData()) {
-                createAnimationOnButtonClick()
-                startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
-                finish()
+                CoroutineScope(Dispatchers.Main).launch {
+                    createAnimationOnButtonClick()
+                    startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
+                    finish()
+                }
             }
         }
     }
@@ -83,16 +85,14 @@ class SignUpActivity : AppCompatActivity() {
 
 
 
-    private fun createAnimationOnButtonClick() {
-        runBlocking {
-            binding.signLayout.animate().translationY(1200f).setDuration(700).start()
-            delay(600)
-            binding.logoImageView
-                .animate()
-                .translationY(-1000f)
-                .setDuration(600)
-                .start()
-            delay(600)
-        }
+    private suspend fun createAnimationOnButtonClick() {
+        binding.logoImageView
+            .animate()
+            .translationY(-1000f)
+            .setDuration(600)
+            .start()
+        delay(300)
+        binding.signLayout.animate().translationY(1200f).setDuration(700).start()
+        delay(600)
     }
 }
