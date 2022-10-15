@@ -5,10 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".presentation.main.fragment.TaskFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.yandex.mapkit.mapview.MapView
+        android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="task" />
+        android:layout_height="match_parent"/>
 
 </FrameLayout>
