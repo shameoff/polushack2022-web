@@ -13,7 +13,10 @@ app.post(
       'The password must be between 8 and 70 characters long',
     ).isLength({ min: 6, max: 70 }),
   ],
-  authController.register,
+  (req, res) => {
+    if (req.query) authController.registerByRole(req, res);
+    else authController.register(req, res);
+  },
 );
 app.post('/user/login', authController.login);
 

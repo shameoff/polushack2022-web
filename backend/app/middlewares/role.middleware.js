@@ -1,6 +1,6 @@
 import UnauthorizedError from '../error/UnauthorizedError';
 import HttpStatus from '../utils/HttpStatus';
-import Role from '../utils/Roles';
+import Role from '../utils/Role';
 
 export default function roleMiddleware(...roles) {
   return function (req, res, next) {

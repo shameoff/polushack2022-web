@@ -22,13 +22,20 @@ class UserService {
 
     try {
       const result = await pool.query(
-        `INSERT INTO public.user VALUES($1, $2, $3, $4)`,
-        [Object.values({ user, password: hash })],
+        `INSERT INTO public.user (first_name, last_name, email, password, role) VALUES($1, $2, $3, $4)`,
+        [...Object.values({ user, password: hash })],
       );
 
       const response = result.rows[0];
 
-      return { ...[response.id, response.firstName, response.lastName, response.email] };
+      return {
+        ...[
+          response.id,
+          response.first_name,
+          response.last_name,
+          response.email,
+        ],
+      };
     } catch (err) {
       throw new UnexpectedError(
         'Something went wrong while trying to create user',
@@ -41,14 +48,18 @@ class UserService {
       'SELECT * FROM public.user WHERE email=$1',
       [email],
     );
-    
-    if (!result) throw new DoesNotExistsError(`User with email ${email} does not exists`);
+
+    if (!result)
+      throw new DoesNotExistsError(`User with email ${email} does not exists`);
 
     return result.rows[0];
   }
 
   async isPasswordValid(user) {
-    return bcrypt.compareSync(user.password, await this.getUserByEmail(user.email));
+    return bcrypt.compareSync(
+      user.password,
+      await this.getUserByEmail(user.email),
+    );
   }
 }
 

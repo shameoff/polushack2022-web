@@ -1,29 +1,40 @@
 import { validationResult } from 'express-validator';
 import authService from '../service/auth.service.js';
-import userService from '../service/user.service.js';
 import HttpStatus from '../utils/HttpStatus.js';
+import Role from '../utils/Role.js';
 
 class AuthController {
+  _checkValidationResult(req, res) {
+    const validationErrors = validationResult(req);
+    if (!validationErrors.isEmpty()) {
+      return res
+        .status(HttpStatus.BAD_REQUEST)
+        .send('Registration error', validationErrors);
+    }
+  }
+
   async register(req, res) {
     try {
-      const validationErrors = validationResult(req);
-      if (!validationErrors.isEmpty()) {
-        return res
-          .status(HttpStatus.BAD_REQUEST)
-          .send('Registration error', validationErrors);
-      }
+      this._checkValidationResult(req, res);
 
-      const user = await userService.create(req.body);
-      user.token = authService.generateAccessToken(user.id, user.role);
-
+      const user = await authService.register(req.body);
       res.status(HttpStatus.CREATED).send(user);
     } catch (err) {
       res.status(err.statusCode).send(err.message);
     }
   }
 
-  async registerAsAdmin(req, res) {
-    
+  async registerByRole(req, res) {
+    try {
+      this._checkValidationResult(req, res);
+
+      const role = Role[req.query.role.toLowerCase()];
+      const user = await authService.register(req.body, role);
+
+      res.status(HttpStatus.CREATED).send(user);
+    } catch (err) {
+      res.status(err.statusCode).send(err.message);
+    }
   }
 
   async login(req, res) {
