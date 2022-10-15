@@ -9,7 +9,7 @@ class UserService {
 
     try {
       const result = await userRepository.create(user)[0];
-      return { ...[result.firstName, result.lastName, result.email] };
+      return { ...[result.first_name, result.last_name, result.email] };
     } catch (err) {
       throw err;
     }

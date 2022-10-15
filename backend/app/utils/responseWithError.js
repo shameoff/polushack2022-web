@@ -6,7 +6,5 @@ export default function responseWithError(res, err) {
     return res.status(err.statusCode).send(err.message);
   }
 
-  return res
-    .status(HttpStatus.INTERNAL_SERVER_ERROR)
-    .send('Something went wrong');
+  return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(err.stack);
 }

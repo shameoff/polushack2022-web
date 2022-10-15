@@ -1,6 +1,6 @@
 export default class BaseError extends Error {
   constructor(statusCode, message) {
-    super(description);
+    super(message);
   
     Object.setPrototypeOf(this, new.target.prototype);
 

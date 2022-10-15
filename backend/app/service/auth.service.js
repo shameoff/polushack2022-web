@@ -10,7 +10,7 @@ class AuthService {
   async register(reqBody, role) {
     if (role) reqBody.role = role;
 
-    const user = await userService.create(req.body);
+    const user = await userService.create(reqBody);
     user.token = this.generateAccessToken(user.id, user.role);
 
     return user;
