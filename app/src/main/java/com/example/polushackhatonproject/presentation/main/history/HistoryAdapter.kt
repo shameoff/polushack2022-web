@@ -2,9 +2,11 @@ package com.example.polushackhatonproject.presentation.main.history
 
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.polushackhatonproject.R
@@ -20,8 +22,10 @@ class HistoryAdapter(private val items: List<TaskHistory>):
 
     inner class MyViewHolder(item: View): RecyclerView.ViewHolder(item) {
         val name: TextView = item.findViewById(R.id.name)
-        val button: Button = item.findViewById(R.id.open_description_button)
-        val description: TextView = item.findViewById(R.id.description)
+        val buttonArea: FrameLayout = item.findViewById(R.id.area_near_button)
+        val button: Button = item.findViewById(R.id.button)
+//        val description: LayoutInflater = item.findViewById(R.id.description)
+        val description: LinearLayout = item.findViewById(R.id.description)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -32,22 +36,28 @@ class HistoryAdapter(private val items: List<TaskHistory>):
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.name.text = items[position].name
-        holder.description.text = items[position].description
+//        holder.description.text = items[position].description
 
-        holder.button.setOnClickListener {
-            CoroutineScope(Dispatchers.Main).launch {
-                if(holder.description.visibility == GONE) {
-                    it.animate()
-                        .rotation(180f)
-                    holder.description.visibility = VISIBLE
-                }
-                else {
-                    it.animate()
-                        .rotation(0f)
-                    holder.description.visibility = GONE
-                }
+        holder.button.setOnClickListener(buttonClickListener(holder))
+        holder.buttonArea.setOnClickListener(buttonClickListener(holder))
+    }
+
+    private fun buttonClickListener(holder: MyViewHolder) = OnClickListener {
+        CoroutineScope(Dispatchers.Main).launch {
+            if(holder.description.visibility == GONE) {
+                it.animate()
+                    .rotation(180f)
+                    .start()
+                println(180f)
+                holder.description.visibility = VISIBLE
             }
-
+            else {
+                it.animate()
+                    .rotation(0f)
+                    .start()
+                println(0f)
+                holder.description.visibility = GONE
+            }
         }
     }
 
