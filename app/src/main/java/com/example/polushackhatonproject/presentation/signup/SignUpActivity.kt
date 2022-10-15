@@ -32,25 +32,21 @@ class SignUpActivity : AppCompatActivity() {
 
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
+
     private fun updateButton() {
         if (checkEmptyFieldsExisting()) {
-            binding.signupButton.background = resources.getDrawable(
-                R.drawable.signup_unlocked_button,
-                this.theme
-            )
-
-            binding.signupButton.setTextColor(resources.getColor(R.color.hint, this.theme))
+            colorizeSigUpButton(R.drawable.signup_unlocked_button, R.color.hint)
             binding.signupButton.isClickable = false
         } else {
-            binding.signupButton.background = resources.getDrawable(
-                R.drawable.signup_locked_button,
-                this.theme
-            )
-
-            binding.signupButton.setTextColor(resources.getColor(R.color.white, this.theme))
+            colorizeSigUpButton(R.drawable.signup_locked_button, R.color.white)
             binding.signupButton.isClickable = true
         }
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private fun colorizeSigUpButton(drawableId: Int, textColorId: Int) {
+        binding.signupButton.background = resources.getDrawable(drawableId, this.theme)
+        binding.signupButton.setTextColor(resources.getColor(textColorId, this.theme))
     }
 
     private fun onSignUpButtonClick() {
@@ -82,20 +78,32 @@ class SignUpActivity : AppCompatActivity() {
 
         viewModel.checkEntryDataValidity(email, password)
         viewModel.getValidationResultLiveData().observe(this) {
-            if (it.passwordResultId != null) {
-                result = false
-                binding.passwordErrorTextView.text = resources.getString(it.passwordResultId)
-            } else {
-                binding.passwordErrorTextView.text = ""
-            }
-            if (it.emailResulId != null) {
-                result = false
-                binding.loginErrorTextView.text = resources.getString(it.emailResulId)
-            } else {
-                binding.loginErrorTextView.text = ""
-            }
+            result = onPasswordValidityResultChange(it.passwordResultId)
+            result = onEmailValidityResultChange(it.emailResultId, result)
         }
 
+        return result
+    }
+
+    private fun onEmailValidityResultChange(emailResultId: Int?, oldResult: Boolean): Boolean {
+        var result = oldResult
+        if (emailResultId != null) {
+            result = false
+            binding.loginErrorTextView.text = resources.getString(emailResultId)
+        } else {
+            binding.loginErrorTextView.text = ""
+        }
+        return result
+    }
+
+    private fun onPasswordValidityResultChange(passwordResultId: Int?): Boolean {
+        var result = true
+        if (passwordResultId != null) {
+            result = false
+            binding.passwordErrorTextView.text = resources.getString(passwordResultId)
+        } else {
+            binding.passwordErrorTextView.text = ""
+        }
         return result
     }
 

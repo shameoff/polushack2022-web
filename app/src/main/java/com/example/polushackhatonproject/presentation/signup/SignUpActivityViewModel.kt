@@ -35,7 +35,7 @@ class SignUpActivityViewModel(application: Application) : AndroidViewModel(appli
 
     fun checkEntryDataValidity(email: String, password: String) {
         val res = validateEntryDataUseCase.execute(ValidatorData(email, password))
-        if (res.emailResulId == null && res.passwordResultId == null) {
+        if (res.emailResultId == null && res.passwordResultId == null) {
             // TODO:: add validation in server
         }
         validationResultLiveData.value = res
@@ -44,7 +44,6 @@ class SignUpActivityViewModel(application: Application) : AndroidViewModel(appli
     fun getValidationResultLiveData(): MutableLiveData<ValidatorResult> {
         return validationResultLiveData
     }
-
 
 
 }

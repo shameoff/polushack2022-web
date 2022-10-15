@@ -1,6 +1,6 @@
 package com.example.polushackhatonproject.domain.signup.model
 
 data class ValidatorResult(
-    val emailResulId: Int?,
+    val emailResultId: Int?,
     val passwordResultId: Int?
 )
