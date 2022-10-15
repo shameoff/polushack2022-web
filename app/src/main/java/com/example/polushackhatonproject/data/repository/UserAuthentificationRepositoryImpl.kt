@@ -34,10 +34,10 @@ class UserAuthentificationRepositoryImpl(context: Context) : UserAuthentificatio
     }
 
     override fun saveLocalToken(token: String) {
-        TODO("Not yet implemented")
+        localStorage.saveToken(token)
     }
 
     override fun getLocalToken(): String {
-        TODO("Not yet implemented")
+        return localStorage.getToken()
     }
 }
