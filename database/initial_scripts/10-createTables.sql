@@ -52,7 +52,7 @@ CREATE TABLE Request (
     requster_id bigint NOT NULL references "User"(id),
     worker_id bigint NOT NULL references "User"(id),
     transport_type varchar NOT NULL references TransportType("type"),
-    characteristics varchar(200) NOT NULL references ,
+    characteristics varchar(200) NOT NULL,
     "time_start" timestamp,
     "time_end" timestamp,
     "status" varchar(10),
