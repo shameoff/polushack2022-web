@@ -6,8 +6,8 @@ services:
     image: postgres:14
     env_file: ./.env
     restart: unless-stopped
-    ports:
-      - $POSTGRES_PORT:5432
+    expose:
+      - 5432
     volumes:
       - ./database/initial_scripts:/docker-entrypoint-initdb.d
       - ./database/postgres_data:/var/lib/postgresql/data
@@ -42,6 +42,6 @@ services:
 
 
 
-
 networks:
   dbnetwork:
+    driver: bridge
