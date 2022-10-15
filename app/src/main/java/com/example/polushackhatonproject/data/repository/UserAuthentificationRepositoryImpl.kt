@@ -12,7 +12,6 @@ class UserAuthentificationRepositoryImpl(context: Context) : UserAuthentificatio
 
     private val localStorage = SharedPreferencesStorage(context)
 
-
     override suspend fun postUserCredits(userCredits: UserCredits): Response<UserCreditsResponse> {
         return NetworkService.apiService.postUserCredits(userCredits)
     }

@@ -16,22 +16,22 @@ interface ApiService {
     }
 
     @GET("user/credits")
-    fun getUserCredits(@Header("Bearer") token: String): Response<UserCreditsResponse>
+    suspend fun getUserCredits(@Header("Bearer") token: String): Response<UserCreditsResponse>
 
     @GET("user/profile")
-    fun getUserProfileData(@Header("Bearer") token: String): Response<UserProfileDataResponse>
+    suspend fun getUserProfileData(@Header("Bearer") token: String): Response<UserProfileDataResponse>
 
     @GET("user/request")
-    fun getTask(@Header("Bearer") token: String): Response<TaskResponse>
+    suspend fun getTask(@Header("Bearer") token: String): Response<TaskResponse>
 
     @GET("user/history")
-    fun getTasksHistory(@Header("Bearer") token: String): Response<ArrayList<Task>>
+    suspend fun getTasksHistory(@Header("Bearer") token: String): Response<ArrayList<Task>>
 
     @POST("user")
-    fun postUserCredits(@Body userCredits: UserCredits): Response<UserCreditsResponse>
+    suspend fun postUserCredits(@Body userCredits: UserCredits): Response<UserCreditsResponse>
 
     @PUT("user/request/complete")
-    fun putDoneTask(
+    suspend fun putDoneTask(
         @Header("Bearer") token: String,
         @Body doneTaskRequest: DoneTaskRequest
     ): Response<Any>
