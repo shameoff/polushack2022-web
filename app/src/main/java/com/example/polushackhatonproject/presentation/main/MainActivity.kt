@@ -6,6 +6,7 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.example.polushackhatonproject.R
 import com.example.polushackhatonproject.databinding.ActivityMainBinding
+import com.example.polushackhatonproject.presentation.main.fragment.MapFragment
 import com.example.polushackhatonproject.presentation.main.fragment.ProfileFragment
 import com.example.polushackhatonproject.presentation.main.fragment.TaskFragment
 import com.example.polushackhatonproject.presentation.main.history.HistoryFragment
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onTabSelect() {
-        binding.tabLayout.getTabAt(1)?.select()
+        binding.tabLayout.getTabAt(2)?.select()
 
         binding.tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
@@ -39,10 +40,14 @@ class MainActivity : AppCompatActivity() {
                         binding.pageName.text = resources.getString(R.string.history)
                     }
                     1 -> {
-                        replaceTaskFragment()
+                        replaceMapFragment()
                         binding.pageName.text = resources.getString(R.string.task)
                     }
                     2 -> {
+                        replaceTaskFragment()
+                        binding.pageName.text = resources.getString(R.string.map)
+                    }
+                    3 -> {
                         replaceProfileFragment()
                         binding.pageName.text = resources.getString(R.string.profile)
                     }
@@ -75,6 +80,13 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.commit {
             setReorderingAllowed(true)
             replace<TaskFragment>(R.id.fragmentContainerView)
+        }
+    }
+
+    private fun replaceMapFragment() {
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace<MapFragment>(R.id.fragmentContainerView)
         }
     }
 }
