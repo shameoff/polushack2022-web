@@ -20,8 +20,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:contentDescription="@string/pictureContentDescription"
-            android:background="@drawable/signup_logo_digital"
-            tools:ignore="ImageContrastCheck" />
+            tools:ignore="ImageContrastCheck"
+            android:scaleType="fitCenter"
+            android:src="@drawable/signup_logo"/>
     </FrameLayout>
 
     <LinearLayout
@@ -42,6 +43,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/signup_input_field"
+            android:fontFamily="@font/stem_font"
             android:hint="@string/login"
             android:importantForAutofill="no"
             android:inputType="textWebEmailAddress"
@@ -57,6 +59,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="32dp"
             android:background="@drawable/signup_input_field"
+            android:fontFamily="@font/stem_font"
             android:hint="@string/password"
             android:importantForAutofill="no"
             android:inputType="textPassword"
@@ -79,6 +82,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="32dp"
                 android:background="@drawable/signup_button"
+                android:fontFamily="@font/stem_font"
                 android:text="@string/signup"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
