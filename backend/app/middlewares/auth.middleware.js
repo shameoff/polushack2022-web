@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import HttpStatus from '../utils/HttpStatus';
+import HttpStatus from '../utils/HttpStatus.js';
 
 export default function authMiddleware(req, res, next) {
   if (req.method === 'OPTIONS') {

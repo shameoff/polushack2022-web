@@ -1,7 +1,7 @@
-import userService from '../service/user.service';
-import HttpStatus from '../utils/HttpStatus';
 import { validationResult } from 'express-validator';
-import authService from '../service/auth.service';
+import authService from '../service/auth.service.js';
+import userService from '../service/user.service.js';
+import HttpStatus from '../utils/HttpStatus.js';
 
 class AuthController {
   async register(req, res) {

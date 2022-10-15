@@ -1,12 +1,12 @@
-import bcrypt from 'bcrypt';
 import * as dotenv from 'dotenv';
 import express from 'express';
 import { check } from 'express-validator';
-import authController from './app/controller/auth.controller';
-import authMiddleware from './app/middlewares/auth.middleware';
+import authController from './app/controller/auth.controller.js';
+import authMiddleware from './app/middlewares/auth.middleware.js';
 
-dotenv.config();
+dotenv.config({ path: '../.env' });
 
+const SERVER_PORT = process.env.BACKEND_SERVER_PORT;
 const app = express();
 app.use(express.json());
 app.use(authMiddleware);
@@ -22,6 +22,9 @@ app.post(
   ],
   authController.register,
 );
+
+
+app.listen(SERVER_PORT);
 
 /* app.post('/user/register', (req, res) => {
   // const { firstName, lastName, email, password } = req.body;

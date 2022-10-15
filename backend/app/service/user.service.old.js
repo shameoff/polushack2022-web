@@ -1,4 +1,4 @@
-import userRepository from '../repository/user.repository';
+import userRepository from '../repository/user.repository.js';
 
 class UserService {
   async create(user) {

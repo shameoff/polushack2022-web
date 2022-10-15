@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import pool from '../config/db.config';
-import AlreadyExistsError from '../error/AlreadyExistsError';
-import UnexpectedError from '../error/UnexpectedError';
+import AlreadyExistsError from '../error/AlreadyExistsError.js';
+import UnexpectedError from '../error/UnexpectedError.js';
 
 class UserRepository {
   async isUserExists(email) {

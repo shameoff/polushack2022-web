@@ -1,5 +1,5 @@
-import HttpStatus from '../utils/HttpStatus';
-import BaseError from './BaseError';
+import HttpStatus from '../utils/HttpStatus.js';
+import BaseError from './BaseError.js';
 
 export default class AlreadyExistsError extends BaseError {
   constructor(

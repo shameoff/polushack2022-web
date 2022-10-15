@@ -1,8 +1,8 @@
 import bcrypt from 'bcrypt';
-import pool from '../config/db.config';
-import AlreadyExistsError from '../error/AlreadyExistsError';
-import DoesNotExistsError from '../error/DoesNotExistError';
-import UnexpectedError from '../error/UnexpectedError';
+import pool from '../config/db.config.js';
+import AlreadyExistsError from '../error/AlreadyExistsError.js';
+import DoesNotExistsError from '../error/DoesNotExistError.js';
+import UnexpectedError from '../error/UnexpectedError.js';
 
 class UserService {
   async isUserExists(email) {

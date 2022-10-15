@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import userService from './user.service';
+import userService from './user.service.js';
 
 class AuthService {
   generateAccessToken(id, role) {
