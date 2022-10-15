@@ -8,17 +8,19 @@ class UserService {
   async isUserExists(email) {
     console.log(1);
     const result = await pool.query(
-      `SELECT EXISTS(SELECT * FROM public.user WHERE email=$1)`,
+      `SELECT EXISTS(SELECT * FROM public."User" WHERE email='$1')`,
       [email],
     );
-    console.log(2);
+    console.log('SAFFIHSAIUFHASF', result);
 
-    return result.rows[0].exists;
+    return result.rows[0].exists === 't' ? true : false;
   }
 
   async create(user) {
     if (this.isUserExists(user.email))
-      throw new AlreadyExistsError(`User with email ${user.email} already exists`);
+      throw new AlreadyExistsError(
+        `User with email ${user.email} already exists`,
+      );
 
     const hash = bcrypt.hashSync(user.password, 10);
 
@@ -114,7 +116,7 @@ class UserService {
    * @param {string} status User's status (available, busy)
    * @returns All users with given status
    */
-   async getUsersByStatus(status) {
+  async getUsersByStatus(status) {
     const result = await pool.query(
       'SELECT * FROM public.user WHERE "status"=$1',
       [status],
@@ -127,9 +129,9 @@ class UserService {
   }
 
   /**
-   * 
-   * @param {string} transportType User's transport type 
-   * @returns 
+   *
+   * @param {string} transportType User's transport type
+   * @returns
    */
   async getUsersByTransportType(transportType) {
     const result = await pool.query(
