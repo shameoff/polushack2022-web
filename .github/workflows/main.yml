@@ -22,4 +22,4 @@ jobs:
             cd /projects/polushack2022-web
             echo "Hi! There is 'echo' comand Hi for you from building docker-compose of your project!"
             # Write here your job when deploy on main
-            docker-compose up --build --force-recreate 
+            docker-compose up --build --force-recreate -d
