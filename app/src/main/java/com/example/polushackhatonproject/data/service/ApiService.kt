@@ -1,5 +1,6 @@
 package com.example.polushackhatonproject.data.service
 
+import com.example.polushackhatonproject.data.model.DoneTaskRequest
 import com.example.polushackhatonproject.data.model.TaskResponse
 import com.example.polushackhatonproject.data.model.UserCreditsResponse
 import com.example.polushackhatonproject.data.model.UserProfileDataResponse
@@ -31,7 +32,7 @@ interface ApiService {
     @PUT("user/request/complete")
     fun putDoneTask(
         @Header("Bearer") token: String,
-        @Body userCredits: UserCredits
+        @Body doneTaskRequest: DoneTaskRequest
     ): Response<Any>
 
 

@@ -9,7 +9,7 @@ data class TaskResponse(
     @SerializedName("latitude")
     var latitude: Float,
     @SerializedName("longitude")
-    var logitude: Float,
+    var longitude: Float,
     @SerializedName("time_start")
     var timeStart: Timestamp,
     @SerializedName("time_end")
