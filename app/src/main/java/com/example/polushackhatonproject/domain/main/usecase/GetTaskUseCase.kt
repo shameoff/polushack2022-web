@@ -1,4 +1,7 @@
 package com.example.polushackhatonproject.domain.main.usecase
 
-class GetTaskUseCase {
+import com.example.polushackhatonproject.domain.main.model.Task
+
+class GetTaskUseCase() {
+
 }
