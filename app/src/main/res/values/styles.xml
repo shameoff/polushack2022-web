@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="main_tab_layout" parent="Widget.Design.TabLayout">
+        <item name="tabSelectedTextColor">@color/primary</item>
+        <item name="tabTextAppearance">@style/main_tab_item_text</item>
+    </style>
+    <style name="main_tab_item_text" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+</resources>
