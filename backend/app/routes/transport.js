@@ -1,14 +1,13 @@
-import app from '../app.js';
-import TransportController from '../service/transport.service.js';
+import { Router } from 'express';
+import TransportController from '../controller/transport.controller.js';
 
+const transportRouter = Router();
+transportRouter.get(
+    '/transport/', (req, res) => {
+                TransportController.getAllTransports(req, res);
+              }
+)
 
-// app.get(
-//     '/transport/', (req, res) => {
-//         console.log("HEILLEW!");
-//         TransportController.getAllTransports(req, res);
-//       }
-// )
-app.get ('/transport/', TransportController.getAllTransports);
+// transportRouter.get('/transport/', TransportController.getAllTransports)
 
-
-export default app;
+export default transportRouter;

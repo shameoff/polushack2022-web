@@ -4,7 +4,7 @@ import authController from '../controller/auth.controller.js';
 import authMiddleware from '../middlewares/auth.middleware.js';
 
 const authRouter = Router();
-authRouter.use(authMiddleware);
+// authRouter.use(authMiddleware);
 authRouter.post(
   '/user/register',
   [

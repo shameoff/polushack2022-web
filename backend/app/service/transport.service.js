@@ -12,7 +12,6 @@ class TransportService {
         'SELECT * FROM public.transport'
       ) 
       // console.log(result.rows);
-      console.log("ХУЙ");
       resolve(result.rows);
   })
   }
