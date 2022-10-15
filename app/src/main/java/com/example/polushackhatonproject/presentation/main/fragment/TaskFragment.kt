@@ -11,6 +11,7 @@ import com.yandex.mapkit.Animation
 import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.CameraPosition
+import com.yandex.runtime.image.ImageProvider
 
 class TaskFragment : Fragment() {
 
@@ -29,6 +30,11 @@ class TaskFragment : Fragment() {
             CameraPosition(Point(55.751574, 37.573856), 11.0f, 0.0f, 0.0f),
             Animation(Animation.Type.SMOOTH, 0f),
             null
+        )
+
+        binding.mapView.map.mapObjects.addPlacemark(
+            Point(55.751574, 37.573856),
+            ImageProvider.fromResource(this.context, R.drawable.main_map_marker)
         )
 
         return mainView
