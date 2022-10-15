@@ -1,10 +1,12 @@
 package com.example.polushackhatonproject.data.service
 
+import com.example.polushackhatonproject.data.model.TaskResponse
 import com.example.polushackhatonproject.data.model.UserCreditsResponse
 import com.example.polushackhatonproject.data.model.UserProfileDataResponse
+import com.example.polushackhatonproject.domain.main.model.Task
+import com.example.polushackhatonproject.domain.signup.model.UserCredits
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Header
+import retrofit2.http.*
 
 interface ApiService {
 
@@ -13,6 +15,24 @@ interface ApiService {
 
     @GET("user/profile")
     fun getUserProfileData(@Header("Bearer") token: String): Response<UserProfileDataResponse>
+
+    @GET("user/request")
+    fun getTask(@Header("Bearer") token: String): Response<TaskResponse>
+
+    @GET("user/history")
+    fun getTasksHistory(@Header("Bearer") token: String): Response<ArrayList<Task>>
+
+    @POST("user")
+    fun postUserCredits(
+        @Header("Bearer") token: String,
+        @Body userCredits: UserCredits
+    ): Response<UserCreditsResponse>
+
+    @PUT("user/request/complete")
+    fun putDoneTask(
+        @Header("Bearer") token: String,
+        @Body userCredits: UserCredits
+    ): Response<Any>
 
 
 }
