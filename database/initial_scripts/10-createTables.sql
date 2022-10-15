@@ -57,5 +57,6 @@ CREATE TABLE Request (
     "time_end" timestamp,
     "status" varchar(10),
     latitude real,
-    longitude real
+    longitude real,
+    "description" text
 );
