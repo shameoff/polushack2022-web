@@ -56,4 +56,6 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     // encrypted shared preferences
     implementation 'androidx.security:security-crypto:1.0.0'
+    // recycler view
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
 }

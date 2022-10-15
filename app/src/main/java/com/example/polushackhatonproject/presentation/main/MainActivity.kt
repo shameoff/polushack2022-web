@@ -6,7 +6,7 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.example.polushackhatonproject.R
 import com.example.polushackhatonproject.databinding.ActivityMainBinding
-import com.example.polushackhatonproject.presentation.main.fragment.HistoryFragment
+import com.example.polushackhatonproject.presentation.main.history.HistoryFragment
 import com.example.polushackhatonproject.presentation.main.fragment.ProfileFragment
 import com.example.polushackhatonproject.presentation.main.fragment.TaskFragment
 import com.google.android.material.tabs.TabLayout
