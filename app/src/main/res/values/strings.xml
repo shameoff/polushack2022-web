@@ -11,4 +11,6 @@
     <string name="password_error">Неправильный пароль</string>
     <string name="small_password_error">Пароль должен иметь более 8 символов</string>
     <string name="data_is_valid">ok</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
