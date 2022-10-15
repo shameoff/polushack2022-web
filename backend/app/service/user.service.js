@@ -28,7 +28,7 @@ class UserService {
 
       const response = result.rows[0];
 
-      return { ...[response.firstName, response.lastName, response.email] };
+      return { ...[response.id, response.firstName, response.lastName, response.email] };
     } catch (err) {
       throw new UnexpectedError(
         'Something went wrong while trying to create user',

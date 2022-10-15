@@ -13,11 +13,17 @@ class AuthController {
           .send('Registration error', validationErrors);
       }
 
-      const result = await userService.create(req.body);
-      res.status(HttpStatus.CREATED).send(result);
+      const user = await userService.create(req.body);
+      user.token = authService.generateAccessToken(user.id, user.role);
+
+      res.status(HttpStatus.CREATED).send(user);
     } catch (err) {
       res.status(err.statusCode).send(err.message);
     }
+  }
+
+  async registerAsAdmin(req, res) {
+    
   }
 
   async login(req, res) {
@@ -33,5 +39,4 @@ class AuthController {
   async logout(req, res) {}
 }
 
-const authController = new AuthController();
-export default authController;
+export default new AuthController();

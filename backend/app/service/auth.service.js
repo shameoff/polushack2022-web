@@ -15,7 +15,7 @@ class AuthService {
       if (!isValid)
         res.status(HttpStatus.BAD_REQUEST).send('The password is incorrect');
 
-      return this.generateAccessToken(user.id);
+      return this.generateAccessToken(user.id, user.role);
     } catch (err) {
       throw err;
     }
@@ -23,3 +23,5 @@ class AuthService {
 }
 
 export default new AuthService();
+
+// TODO: Список характеристик

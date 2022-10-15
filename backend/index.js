@@ -1,28 +1,9 @@
 import * as dotenv from 'dotenv';
-import express from 'express';
-import { check } from 'express-validator';
-import authController from './app/controller/auth.controller.js';
-import authMiddleware from './app/middlewares/auth.middleware.js';
+import app from './app/app.js';
 
 dotenv.config({ path: '../.env' });
 
 const SERVER_PORT = process.env.BACKEND_SERVER_PORT;
-const app = express();
-app.use(express.json());
-app.use(authMiddleware);
-
-app.post(
-  '/user/register',
-  [
-    check('email', "Email can't be empty").notEmpty(),
-    check(
-      'password',
-      'The password must be between 8 and 70 characters long',
-    ).isLength({ min: 6, max: 70 }),
-  ],
-  authController.register,
-);
-
 
 app.listen(SERVER_PORT);
 
