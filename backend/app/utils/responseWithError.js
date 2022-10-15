@@ -1,5 +1,5 @@
-import BaseError from '../error/BaseError';
-import HttpStatus from './HttpStatus';
+import BaseError from '../error/BaseError.js';
+import HttpStatus from './HttpStatus.js';
 
 export default function responseWithError(res, err) {
   if (err instanceof BaseError) {
