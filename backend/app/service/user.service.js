@@ -95,11 +95,7 @@ class UserService {
       };
     } catch (err) {
       throw new UnexpectedError(
-<<<<<<< HEAD
-        `Something went wrong while trying to create user. ERR: ${err}`,
-=======
         `Something went wrong while trying to create user. Err: ${err}`,
->>>>>>> develop
       );
     }
   }
