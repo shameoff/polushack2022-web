@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             override fun onTabReselected(tab: TabLayout.Tab?) {
             }
         })
-        binding.tabLayout.getTabAt(2)?.select()
+        binding.tabLayout.getTabAt(1)?.select()
     }
 
     private fun replaceHistoryFragment() {
