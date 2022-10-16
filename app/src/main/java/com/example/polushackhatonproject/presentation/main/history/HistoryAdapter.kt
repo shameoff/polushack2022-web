@@ -46,12 +46,12 @@ class HistoryAdapter(private val items: List<TaskHistory>):
         CoroutineScope(Dispatchers.Main).launch {
             if(holder.description.visibility == GONE) {
 
-                holder.button.rotation = 180f
+                holder.button.animate().rotation(180f)
                 holder.description.text = value
                 holder.description.visibility = VISIBLE
             }
             else {
-                holder.button.rotation = 0f
+                holder.button.animate().rotation(0f)
                 holder.description.text = ""
                 holder.description.visibility = GONE
             }
