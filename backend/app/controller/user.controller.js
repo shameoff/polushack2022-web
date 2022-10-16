@@ -1,7 +1,7 @@
-import HttpStatus from '../utils/HttpStatus';
-import userService from '../service/user.service';
-import responseWithError from '../utils/responseWithError';
-import Role from '../utils/Role';
+import userService from '../service/user.service.js';
+import HttpStatus from '../utils/HttpStatus.js';
+import responseWithError from '../utils/responseWithError.js';
+import Role from '../utils/Role.js';
 
 class UserController {
   async getAll(req, res) {
@@ -22,7 +22,8 @@ class UserController {
 
   async getUserById(req, res) {
     try {
-      const user = await userService.getUserById(req.query.id);
+      console.log(req.params.id);
+      const user = await userService.getUserById(req.params.id);
 
       res.status(HttpStatus.OK).send(user);
     } catch (err) {
@@ -30,10 +31,10 @@ class UserController {
     }
   }
 
-  async getUserByRole(req, res) {
+  async getUsersByRole(req, res) {
     try {
       const user = await userService.getUserByRole(Role.getRoleByName(req.query.role));
-
+      res.status(HttpStatus.ACCEPTED).send(user);
     } catch (err) {
       responseWithError(res, err);
     }
@@ -41,9 +42,10 @@ class UserController {
 
   async getUserByStatus(req, res) {
     try {
-      
+      const user = userService.getUsersByStatus(req.query.status);
+      res.status(HttpStatus.ACCEPTED).send(user);
     } catch (err) {
-      
+      responseWithError(res, err);
     }
   }
 }

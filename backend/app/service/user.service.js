@@ -37,9 +37,7 @@ class UserService {
 
   async create(user) {
     if (await this.isUserByEmailExists(user.email))
-      throw new AlreadyExistError(
-        `User with email ${user.email} already exists`,
-      );
+      throw new AlreadyExistError(`User with email ${user.email} already exists`);
 
     const hash = bcrypt.hashSync(user.password, 10);
 
@@ -56,9 +54,7 @@ class UserService {
 
       const now = new Date();
       const status =
-        work_start_time < now && now < work_end_time
-          ? UserStatus[0]
-          : UserStatus[3];
+        work_start_time < now && now < work_end_time ? UserStatus[0] : UserStatus[3];
 
       console.log('UserService', user.role);
       const result = await pool.query(
@@ -112,9 +108,7 @@ class UserService {
 
   async change(id, user) {
     const result = await pool.query(
-      `UPDATE ${this._tableName} SET ${this._createUpdateString(
-        user,
-      )} WHERE id=${id}`,
+      `UPDATE ${this._tableName} SET ${this._createUpdateString(user)} WHERE id=${id}`,
     );
 
     if (isObjectEmpty(result))
@@ -124,25 +118,19 @@ class UserService {
   }
 
   async getUserByEmail(email) {
-    const result = await pool.query(
-      `SELECT * FROM ${this._tableName} WHERE email=$1`,
-      [email],
-    );
+    const result = await pool.query(`SELECT * FROM ${this._tableName} WHERE email=$1`, [
+      email,
+    ]);
 
-    if (!result)
-      throw new DoesNotExistError(`User with email: ${email} does not exist`);
+    if (!result) throw new DoesNotExistError(`User with email: ${email} does not exist`);
 
     return result.rows[0];
   }
 
   async getUserById(id) {
-    const result = await pool.query(
-      `SELECT * FROM ${this._tableName} WHERE id=$1`,
-      [id],
-    );
+    const result = await pool.query(`SELECT * FROM ${this._tableName} WHERE id=$1`, [id]);
 
-    if (!result)
-      throw new DoesNotExistError(`User with id: ${id} does not exist`);
+    if (!result) throw new DoesNotExistError(`User with id: ${id} does not exist`);
 
     return result.rows[0];
   }
@@ -159,13 +147,11 @@ class UserService {
    * @returns All users with given role
    */
   async getUsersByRole(role) {
-    const result = await pool.query(
-      `SELECT * FROM ${this._tableName} WHERE "role"=$1`,
-      [role],
-    );
+    const result = await pool.query(`SELECT * FROM ${this._tableName} WHERE "role"=$1`, [
+      role,
+    ]);
 
-    if (!result)
-      throw new DoesNotExistError(`Users with role: ${role} do not exist`);
+    if (!result) throw new DoesNotExistError(`Users with role: ${role} do not exist`);
 
     return result.rows;
   }
@@ -181,8 +167,7 @@ class UserService {
       [status],
     );
 
-    if (!result)
-      throw new DoesNotExistError(`Users with status: ${status} do not exist`);
+    if (!result) throw new DoesNotExistError(`Users with status: ${status} do not exist`);
 
     return result.rows;
   }
@@ -197,14 +182,22 @@ class UserService {
       `SELECT "id" FROM public.transport_type WHERE "type"=${transportType}`,
     );
 
+    if (!transportTypeIdResult.rows[0]) {
+      throw new DoesNotExistError(`Type ${transportType} does not exist`);
+    }
+
     const userIdsResult = await pool.query(
       `SELECT "user_id" FROM public.user_transport_type WHERE "transport_type_id"=${transportTypeIdResult.rows[0]}`,
     );
 
+    if (userIdsResult.rows) {
+      throw new DoesNotExistError(`There is no users with type ${transportType}`);
+    }
+
     const usersResult = await pool.query(
-      `SELECT * FROM ${this._tableName} WHERE id IN ${userIdsResult.rows.join(
-        ',',
-      )}`,
+      `SELECT id, first_name, last_name, email FROM ${
+        this._tableName
+      } WHERE id IN ${userIdsResult.rows.join(',')}`,
     );
 
     if (!result)
@@ -212,12 +205,10 @@ class UserService {
         `Users with transportType: ${transportType} do not exist`,
       );
 
-    return result.rows;
+    return usersResult.rows;
   }
 
-  async getUsersByParams(status, transportType, latitude, longitude) {
-    const result = await pool.query(`SELECT * FROM `);
-  }
+ 
 
   async isPasswordValid(logginingUser) {
     const user = await this.getUserByEmail(logginingUser.email);
