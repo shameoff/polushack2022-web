@@ -10,7 +10,7 @@ class TransportService {
       const result = await pool.query(
         'SELECT * FROM public.transport'
       ) 
-      resolve(result.status);
+      resolve(result.rows);
   })
   }
   async getAvailableTransport() {
@@ -18,7 +18,7 @@ class TransportService {
       const result = await pool.query(
         'SELECT * FROM public.transport WHERE "status"="available"'
       ) 
-      resolve(result.status);
+      resolve(result.rows);
   })
   }
   async getOccupiedTransport() {
@@ -26,7 +26,7 @@ class TransportService {
       const result = await pool.query(
         'SELECT * FROM public.transport WHERE "status"="occupied"'
       ) 
-      resolve(result.status);
+      resolve(result.rows);
   })
   }
   async getPendingTransport() {
@@ -34,7 +34,7 @@ class TransportService {
       const result = await pool.query(
         'SELECT * FROM public.transport WHERE "status"="pending"'
       ) 
-      resolve(result.status);
+      resolve(result.rows);
   })
   }
   async addTransport(type, characteristics=null, name, car_number, status=null) {
