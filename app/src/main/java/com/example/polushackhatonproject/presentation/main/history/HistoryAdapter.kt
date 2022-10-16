@@ -24,8 +24,8 @@ class HistoryAdapter(private val items: List<TaskHistory>):
         val name: TextView = item.findViewById(R.id.name)
         val buttonArea: FrameLayout = item.findViewById(R.id.area_near_button)
         val button: Button = item.findViewById(R.id.button)
-//        val description: LayoutInflater = item.findViewById(R.id.description)
-        val description: LinearLayout = item.findViewById(R.id.description)
+        val date: TextView = item.findViewById(R.id.date)
+        val description: TextView = item.findViewById(R.id.description)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -36,19 +36,19 @@ class HistoryAdapter(private val items: List<TaskHistory>):
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.name.text = items[position].name
-//        holder.description.text = items[position].description
 
-        holder.button.setOnClickListener(buttonClickListener(holder))
-        holder.buttonArea.setOnClickListener(buttonClickListener(holder))
+        holder.button.setOnClickListener(buttonClickListener(holder, items[position].description))
+        holder.buttonArea.setOnClickListener(buttonClickListener(holder, items[position].description))
     }
 
-    private fun buttonClickListener(holder: MyViewHolder) = OnClickListener {
+    private fun buttonClickListener(holder: MyViewHolder, value: String) = OnClickListener {
         CoroutineScope(Dispatchers.Main).launch {
             if(holder.description.visibility == GONE) {
                 it.animate()
                     .rotation(180f)
                     .start()
                 println(180f)
+                holder.description.text = value
                 holder.description.visibility = VISIBLE
             }
             else {
@@ -56,6 +56,7 @@ class HistoryAdapter(private val items: List<TaskHistory>):
                     .rotation(0f)
                     .start()
                 println(0f)
+                holder.description.text = ""
                 holder.description.visibility = GONE
             }
         }
