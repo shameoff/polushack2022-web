@@ -4,47 +4,77 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:paddingEnd="8dp"
+    android:paddingStart="8dp">
+
+    <FrameLayout
+        android:layout_width="4dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="2dp">
+        <View
+            android:layout_width="4dp"
+            android:layout_height="4dp"
+            android:background="@drawable/history_ellipse"/>
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/bold_border"
+            android:layout_marginTop="1dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginBottom="8dp"/>
+    </FrameLayout>
+
     <LinearLayout
         android:layout_weight="1"
         android:layout_width="0dp"
+        android:paddingTop="8dp"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <LinearLayout
-            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <View
-                android:layout_width="4dp"
-                android:layout_height="4dp"
-                android:layout_margin="4dp"
-                android:layout_gravity="center"
-                android:background="@drawable/history_ellipse"/>
+            android:layout_height="wrap_content"
+            android:weightSum="1">
             <TextView
-                android:id="@+id/task_name"
-                android:textSize="20sp"
-                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/name"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/history"
+                android:layout_marginStart="2dp"
+                android:fontFamily="@font/stem_medium"
                 android:textColor="@color/text"/>
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/stem_medium"
+                android:textSize="10sp"
+                android:textColor="@color/text"
+                android:text="16.10.2022"/>
         </LinearLayout>
         <TextView
             android:id="@+id/description"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/stem_font"
             android:textColor="@color/text"
-            android:textSize="14sp"
-            android:layout_marginStart="12dp"
-            android:layout_height="wrap_content"/>
+            android:paddingBottom="8dp"
+            android:visibility="gone"/>
     </LinearLayout>
+
     <FrameLayout
+        android:id="@+id/area_near_button"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:layout_gravity="bottom">
         <Button
-            android:id="@+id/open_description_button"
-            android:layout_width="30dp"
-            android:layout_height="18dp"
-            android:layout_marginBottom="20dp"
-            android:layout_gravity="bottom"
+            android:id="@+id/button"
+            android:layout_width="20dp"
+            android:layout_height="12dp"
             android:background="@drawable/history_arrow"/>
     </FrameLayout>
 </LinearLayout>
