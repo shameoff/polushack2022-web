@@ -125,7 +125,8 @@ class UserService {
 
   async getUserByEmail(email) {
     const result = await pool.query(
-      `SELECT * FROM ${this._tableName} WHERE email=${email}`,
+      `SELECT * FROM ${this._tableName} WHERE email=$1`,
+      [email],
     );
 
     if (!result)
@@ -136,7 +137,8 @@ class UserService {
 
   async getUserById(id) {
     const result = await pool.query(
-      `SELECT * FROM ${this._tableName} WHERE id=${id}`,
+      `SELECT * FROM ${this._tableName} WHERE id=$1`,
+      [id],
     );
 
     if (!result)
@@ -217,12 +219,13 @@ class UserService {
     const result = await pool.query(`SELECT * FROM `);
   }
 
-  async isPasswordValid(user) {
-    return bcrypt.compareSync(
-      user.password,
-      await this.getUserByEmail(user.email),
-    );
+  async isPasswordValid(logginingUser) {
+    const user = await this.getUserByEmail(logginingUser.email);
+
+    return bcrypt.compareSync(logginingUser.password, user.password_hash);
   }
 }
+
+// TODO: change 'change' method because there is no response on this
 
 export default new UserService();

@@ -13,24 +13,20 @@ class AuthService {
       reqBody.role = Role.USER;
     }
     const user = await userService.create(reqBody);
-    
+
     user.token = this.generateAccessToken(user.id, user.role);
 
     return user;
   }
 
   async login(reqBody) {
-    try {
-      const user = await userService.getUserByEmail(reqBody.email);
-      const isValid = await userService.isPasswordValid(reqBody);
+    const user = await userService.getUserByEmail(reqBody.email);
+    const isValid = await userService.isPasswordValid(reqBody);
 
-      if (!isValid)
-        res.status(HttpStatus.BAD_REQUEST).send('The password is incorrect');
+    if (!isValid)
+      res.status(HttpStatus.BAD_REQUEST).send('The password is incorrect');
 
-      return this.generateAccessToken(user.id, user.role);
-    } catch (err) {
-      throw err;
-    }
+    return this.generateAccessToken(user.id, user.role);
   }
 }
 

@@ -18,20 +18,9 @@ class AuthController {
     try {
       this._checkValidationResult(req, res);
 
-      if ('role' in req.query) req.body.role = Role.getRoleByName(req.query.role.toLowerCase());
+      if ('role' in req.query)
+        req.body.role = Role.getRoleByName(req.query.role.toLowerCase());
       const user = await authService.register(req.body);
-
-      res.status(HttpStatus.CREATED).send(user);
-    } catch (err) {
-      responseWithError(res, err);
-    }
-  }
-
-  async registerByRole(req, res) {
-    try {
-      this._checkValidationResult(req, res);
-
-      const user = await authService.register(req.body, role);
 
       res.status(HttpStatus.CREATED).send(user);
     } catch (err) {
@@ -43,7 +32,7 @@ class AuthController {
     // req.body = { email: "ssafds@mail.ru", password: "12389adsyf"}
     try {
       const token = await authService.login(req.body);
-      res.status(HttpStatus.ACCEPTED).send(token);
+      res.status(HttpStatus.ACCEPTED).send({ token: token });
     } catch (err) {
       responseWithError(res, err);
     }

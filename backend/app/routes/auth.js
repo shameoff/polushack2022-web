@@ -15,10 +15,7 @@ authRouter.post(
       'The password must be between 8 and 70 characters long',
     ).isLength({ min: 6, max: 70 }),
   ],
-  (req, res) => {
-    if (isObjectEmpty(req.query)) authController.register(req, res);
-    else authController.registerByRole(req, res);
-  },
+  authController.register,
 );
 authRouter.post('/user/login', authController.login);
 authRouter.get('/user/register', (req, res) => {
