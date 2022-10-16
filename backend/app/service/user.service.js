@@ -10,7 +10,7 @@ function getHMSTime(date) {
 }
 
 class UserService {
-  _tableName = 'public."User"';
+  _tableName = 'public."user"';
 
   async isUserExists(email) {
     const result = await pool.query(
