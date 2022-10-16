@@ -1,4 +1,4 @@
-package com.example.polushackhatonproject.presentation.main.fragment.task
+package com.example.polushackhatonproject.presentation.main.task
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package com.example.polushackhatonproject.presentation.main.fragment
+package com.example.polushackhatonproject.presentation.main.map
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.polushackhatonproject.R
 import com.example.polushackhatonproject.databinding.FragmentMapBinding
-import com.example.polushackhatonproject.databinding.FragmentTaskBinding
+import com.example.polushackhatonproject.domain.main.model.Coordinate
 import com.yandex.mapkit.Animation
 import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Point
@@ -22,6 +22,10 @@ class MapFragment : Fragment() {
 
     private lateinit var binding: FragmentMapBinding
 
+    private val viewModel by lazy {
+        MapFragmentViewModel(activity?.application!!)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -33,17 +37,21 @@ class MapFragment : Fragment() {
             null
         )
 
-        binding.mapView.map.mapObjects.addPlacemark(
-            Point(55.751574, 37.573856),
-            ImageProvider.fromResource(this.context, R.drawable.main_map_marker)
-        )
-
-        binding.mapView.map.mapObjects.addPlacemark(
-            Point(35.751574, 37.573856),
-            ImageProvider.fromResource(this.context, R.drawable.main_map_marker)
-        )
-
+        // TODO: добавить функцию onCoordinatesLiveDataChange()
         return mainView
+    }
+
+    private fun onCoordinatesLiveDataChange() {
+        viewModel.getCoordinatesLiveData().observe(this) {
+            createPlacemark(it)
+        }
+    }
+
+    private fun createPlacemark(coordinate: Coordinate) {
+        binding.mapView.map.mapObjects.addPlacemark(
+            Point(coordinate.latitude.toDouble(), coordinate.longitude.toDouble()),
+            ImageProvider.fromResource(this.context, R.drawable.main_map_marker)
+        )
     }
 
     override fun onStop() {
