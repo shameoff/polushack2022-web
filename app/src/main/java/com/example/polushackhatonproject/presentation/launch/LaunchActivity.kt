@@ -30,13 +30,13 @@ class LaunchActivity : AppCompatActivity() {
     private fun onObserveUserCreditsLiveData() {
         viewModel.getIsUserCreditsCreatedLiveData().observe(this) {
             if (it) {
-                CoroutineScope(Dispatchers.Main).launch {
-                    delay(1500)
-                    makeIntent(it)
-                    finish()
-                }
                 // TODO: раскоммитить это и удалить выше
                 //onObserveTokenLiveData()
+            }
+            CoroutineScope(Dispatchers.Main).launch {
+                delay(1500)
+                makeIntent(it)
+                finish()
             }
         }
     }
