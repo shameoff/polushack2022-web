@@ -1,7 +1,4 @@
-# polushack2022-web
-Бэкенд и фронтэнд с хакатона. Мобилка в другом репозитории, ссылку на который оставим позже
-
-
+# PolusHackathonWeb
 
 ### База данных
 Как БД мы используем PostgreSQL 14 версии. В папке database/ лежат скрипты для инициализации БД и volume из docker-контейнера, дабы сохранять данные на хостовой машине, а не только в докере. 
@@ -13,8 +10,7 @@
 **При ребилде docker-compose** <br>
 нужно прописывать `sudo rm -rf ./database/postgres_data`, иначе же база данных останется в прежнем положении и переменные из .env и скрипты из ./database/initial_scripts работать **не будут!**
 
-=======
-# PolusHackathonProject
+# PolusHackathonMobile
 
 *Mobile app for drivers of Polus Company*
 
