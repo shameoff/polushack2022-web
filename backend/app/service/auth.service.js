@@ -8,10 +8,12 @@ class AuthService {
     return jwt.sign(payload, process.env.SECRET /* , { expiresIn: '14h' } */);
   }
 
-  async register(reqBody, role) {
-    reqBody.role = role ? role : Role.USER;
-
+  async register(reqBody) {
+    if (!reqBody.role) {
+      reqBody.role = Role.USER;
+    }
     const user = await userService.create(reqBody);
+    
     user.token = this.generateAccessToken(user.id, user.role);
 
     return user;

@@ -38,6 +38,14 @@ class UserController {
       responseWithError(res, err);
     }
   }
+
+  async getUserByStatus(req, res) {
+    try {
+      
+    } catch (err) {
+      
+    }
+  }
 }
 
 export default new UserController();

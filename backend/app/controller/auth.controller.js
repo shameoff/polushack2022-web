@@ -18,6 +18,7 @@ class AuthController {
     try {
       this._checkValidationResult(req, res);
 
+      if ('role' in req.query) req.body.role = Role.getRoleByName(req.query.role.toLowerCase());
       const user = await authService.register(req.body);
 
       res.status(HttpStatus.CREATED).send(user);
@@ -30,7 +31,6 @@ class AuthController {
     try {
       this._checkValidationResult(req, res);
 
-      const role = Role.getRoleByName(req.query.role.toLowerCase());
       const user = await authService.register(req.body, role);
 
       res.status(HttpStatus.CREATED).send(user);
