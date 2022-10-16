@@ -68,7 +68,7 @@ class UserService {
       );
 
       const response = result.rows[0];
-
+      console.log(result.rows);
       return {
         ...[
           response.id,
