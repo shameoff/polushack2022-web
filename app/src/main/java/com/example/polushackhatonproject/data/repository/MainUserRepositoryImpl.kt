@@ -8,23 +8,22 @@ import com.example.polushackhatonproject.domain.main.model.Task
 import com.example.polushackhatonproject.domain.repository.MainUserRepository
 import retrofit2.Response
 
-class MainUserRepositoryImpl : MainUserRepository {
-    override suspend fun getTask(token: String): Response<TaskResponse> {
+class MainUserRepositoryImpl(private val token: String) : MainUserRepository {
+    override suspend fun getTask(): Response<TaskResponse> {
         return NetworkService.apiService.getTask(token)
     }
 
-    override suspend fun getHistory(token: String): Response<ArrayList<Task>> {
+    override suspend fun getHistory(): Response<ArrayList<Task>> {
         return NetworkService.apiService.getTasksHistory(token)
     }
 
     override suspend fun putCompletedTask(
-        token: String,
         completedTaskRequest: CompletedTaskRequest
     ): Response<Any> {
         return NetworkService.apiService.putCompletedTask(token, completedTaskRequest)
     }
 
-    override suspend fun getUserProfileData(token: String): Response<UserProfileDataResponse> {
+    override suspend fun getUserProfileData(): Response<UserProfileDataResponse> {
         return NetworkService.apiService.getUserProfileData(token)
     }
 

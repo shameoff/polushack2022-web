@@ -8,7 +8,7 @@ import com.example.polushackhatonproject.R
 import com.example.polushackhatonproject.databinding.ActivityMainBinding
 import com.example.polushackhatonproject.presentation.main.fragment.MapFragment
 import com.example.polushackhatonproject.presentation.main.fragment.ProfileFragment
-import com.example.polushackhatonproject.presentation.main.fragment.TaskFragment
+import com.example.polushackhatonproject.presentation.main.fragment.task.TaskFragment
 import com.example.polushackhatonproject.presentation.main.history.HistoryFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener

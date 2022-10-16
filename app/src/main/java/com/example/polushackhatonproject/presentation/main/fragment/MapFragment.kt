@@ -38,6 +38,11 @@ class MapFragment : Fragment() {
             ImageProvider.fromResource(this.context, R.drawable.main_map_marker)
         )
 
+        binding.mapView.map.mapObjects.addPlacemark(
+            Point(35.751574, 37.573856),
+            ImageProvider.fromResource(this.context, R.drawable.main_map_marker)
+        )
+
         return mainView
     }
 

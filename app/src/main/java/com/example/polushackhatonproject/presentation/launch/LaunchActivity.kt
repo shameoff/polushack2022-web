@@ -12,7 +12,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class LaunchActivity : AppCompatActivity() {
-
     private val binding by lazy {
         ActivityLaunchBinding.inflate(this.layoutInflater)
     }
@@ -31,7 +30,13 @@ class LaunchActivity : AppCompatActivity() {
     private fun onObserveUserCreditsLiveData() {
         viewModel.getIsUserCreditsCreatedLiveData().observe(this) {
             if (it) {
-                onObserveTokenLiveData()
+                CoroutineScope(Dispatchers.Main).launch {
+                    delay(1500)
+                    makeIntent(it)
+                    finish()
+                }
+                // TODO: раскоммитить это и удалить выше
+                //onObserveTokenLiveData()
             }
         }
     }

@@ -7,11 +7,11 @@ import com.example.polushackhatonproject.domain.main.model.Task
 import retrofit2.Response
 
 interface MainUserRepository {
-    suspend fun getTask(token: String): Response<TaskResponse>
+    suspend fun getTask(): Response<TaskResponse>
 
-    suspend fun getHistory(token: String): Response<ArrayList<Task>>
+    suspend fun getHistory(): Response<ArrayList<Task>>
 
-    suspend fun putCompletedTask(token: String, completedTaskRequest: CompletedTaskRequest): Response<Any>
+    suspend fun putCompletedTask(completedTaskRequest: CompletedTaskRequest): Response<Any>
 
-    suspend fun getUserProfileData(token: String): Response<UserProfileDataResponse>
+    suspend fun getUserProfileData(): Response<UserProfileDataResponse>
 }

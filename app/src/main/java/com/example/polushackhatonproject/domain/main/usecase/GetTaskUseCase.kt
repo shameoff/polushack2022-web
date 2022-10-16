@@ -7,8 +7,8 @@ import java.util.Date
 
 class GetTaskUseCase(private val mainUserRepository: MainUserRepository) {
 
-    suspend fun execute(token: String): Task? {
-        val response = mainUserRepository.getTask(token)
+    suspend fun execute(): Task? {
+        val response = mainUserRepository.getTask()
         return if (response.isSuccessful) {
             convertTaskResponseToTask(response.body()!!)
         } else {
