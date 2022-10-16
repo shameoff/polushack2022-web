@@ -27,12 +27,12 @@ class HistoryFragment : Fragment() {
 
         binding.historyList.layoutManager = LinearLayoutManager(context)
         val items = listOf(
-            TaskHistory("task", "task tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask task"),
-            TaskHistory("task", "task tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask task"),
-            TaskHistory("task", "task tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask task"),
-            TaskHistory("task", "task task"),
-            TaskHistory("task", "task tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask task"),
-            TaskHistory("task", "task tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask task"))
+            TaskHistory("task", "task tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask task", ""),
+            TaskHistory("task", "task tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask task", ""),
+            TaskHistory("task", "task tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask task", ""),
+            TaskHistory("task", "task task", ""),
+            TaskHistory("task", "task tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask task", ""),
+            TaskHistory("task", "task tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask tasktask task", ""))
         val adapter = HistoryAdapter(items)
         binding.historyList.adapter = adapter
         binding.historyList.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
