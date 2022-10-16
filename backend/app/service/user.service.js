@@ -79,7 +79,7 @@ class UserService {
       };
     } catch (err) {
       throw new UnexpectedError(
-        'Something went wrong while trying to create user',
+        `Something went wrong while trying to create user. ERR: ${err}`,
       );
     }
   }
