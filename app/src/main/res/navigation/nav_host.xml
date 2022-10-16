@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/taskFragment"
-        android:name="com.example.polushackhatonproject.presentation.main.fragment.MapFragment"
+        android:name="com.example.polushackhatonproject.presentation.main.map.MapFragment"
         android:label="fragment_task"
         tools:layout="@layout/fragment_map" >
         <action
