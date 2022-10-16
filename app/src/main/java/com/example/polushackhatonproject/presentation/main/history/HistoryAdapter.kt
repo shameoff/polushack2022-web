@@ -14,6 +14,7 @@ import com.example.polushackhatonproject.domain.main.model.TaskHistory
 import com.google.android.material.chip.ChipGroup.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.w3c.dom.Text
 
@@ -44,18 +45,13 @@ class HistoryAdapter(private val items: List<TaskHistory>):
     private fun buttonClickListener(holder: MyViewHolder, value: String) = OnClickListener {
         CoroutineScope(Dispatchers.Main).launch {
             if(holder.description.visibility == GONE) {
-                it.animate()
-                    .rotation(180f)
-                    .start()
-                println(180f)
+
+                holder.button.rotation = 180f
                 holder.description.text = value
                 holder.description.visibility = VISIBLE
             }
             else {
-                it.animate()
-                    .rotation(0f)
-                    .start()
-                println(0f)
+                holder.button.rotation = 0f
                 holder.description.text = ""
                 holder.description.visibility = GONE
             }
