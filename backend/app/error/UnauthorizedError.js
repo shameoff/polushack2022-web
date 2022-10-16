@@ -6,6 +6,8 @@ export default class UnauthorizedError extends BaseError {
     statusCode = HttpStatus.UNAUTHORIZED,
     message = `User is unauthorized`,
   ) {
+    super(statusCode, message);
+
     this.name = 'UnauthorizedError';
     this.message = message;
     this.statusCode = statusCode;

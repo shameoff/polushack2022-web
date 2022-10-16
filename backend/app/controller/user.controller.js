@@ -1,5 +1,5 @@
-import userService from '../service/user.service';
 import HttpStatus from '../utils/HttpStatus';
+import userService from '../service/user.service';
 import responseWithError from '../utils/responseWithError';
 import Role from '../utils/Role';
 
@@ -33,7 +33,7 @@ class UserController {
   async getUserByRole(req, res) {
     try {
       const user = await userService.getUserByRole(Role.getRoleByName(req.query.role));
-      
+
     } catch (err) {
       responseWithError(res, err);
     }

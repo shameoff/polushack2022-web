@@ -3,21 +3,28 @@ import pool from '../config/db.config.js';
 import AlreadyExistsError from '../error/AlreadyExistsError.js';
 import DoesNotExistsError from '../error/DoesNotExistError.js';
 import UnexpectedError from '../error/UnexpectedError.js';
+import UserStatus from '../utils/UserStatus.js';
+
+function getHMSTime(date) {
+  return date.toTimeString().split(' ')[0];
+}
 
 class UserService {
+  _tableName = 'public."User"';
+
   async isUserExists(email) {
-    console.log(1);
     const result = await pool.query(
-      `SELECT EXISTS(SELECT * FROM public."User" WHERE email='$1')`,
+      `SELECT EXISTS(SELECT * FROM ${this._tableName} WHERE email=$1)`,
       [email],
     );
-    console.log('SAFFIHSAIUFHASF', result);
+    console.log(result);
+    const exists = result.rows[0].exists;
 
-    return result.rows[0].exists === 't' ? true : false;
+    return exists === 't' || exists === 1 ? true : false;
   }
 
   async create(user) {
-    if (this.isUserExists(user.email))
+    if (await this.isUserExists(user.email))
       throw new AlreadyExistsError(
         `User with email ${user.email} already exists`,
       );
@@ -25,9 +32,39 @@ class UserService {
     const hash = bcrypt.hashSync(user.password, 10);
 
     try {
+      const work_start_time = new Date();
+      work_start_time.setHours(8, 0, 0);
+      const work_end_time = new Date();
+      work_end_time.setHours(17, 0, 0);
+
+      const rest_start_time = new Date();
+      rest_start_time.setHours(12, 0, 0);
+      const rest_end_time = new Date();
+      rest_end_time.setHours(13, 0, 0);
+
+      const now = new Date();
+      const status =
+        work_start_time < now && now < work_end_time
+          ? UserStatus[0]
+          : UserStatus[3];
+
       const result = await pool.query(
-        `INSERT INTO public.user (first_name, last_name, email, password, role) VALUES($1, $2, $3, $4)`,
-        [...Object.values({ user, password: hash })],
+        `INSERT INTO ${this._tableName} 
+        (first_name, last_name, email, password_hash, role, status, work_start_time, work_end_time, rest_start_time, rest_end_time)
+        VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`,
+        [
+          user.first_name,
+          user.last_name,
+          user.email,
+          hash,
+          user.role,
+          status,
+          getHMSTime(work_start_time),
+          getHMSTime(work_end_time),
+          getHMSTime(rest_start_time),
+          getHMSTime(rest_end_time),
+        ],
+        /* [...Object.values({ user, password: hash })], */
       );
 
       const response = result.rows[0];
@@ -49,7 +86,7 @@ class UserService {
 
   async getUserByEmail(email) {
     const result = await pool.query(
-      'SELECT * FROM public.user WHERE email=$1',
+      `SELECT * FROM ${this._tableName} WHERE email=$1`,
       [email],
     );
 
@@ -61,7 +98,7 @@ class UserService {
 
   async getUserById(id) {
     const result = await pool.query(
-      'SELECT * FROM public.user WHERE email=$1',
+      `SELECT * FROM ${this._tableName} WHERE email=$1`,
       [id],
     );
 
@@ -72,7 +109,7 @@ class UserService {
   }
 
   async getAll() {
-    const result = await pool.query('SELECT * FROM public.user');
+    const result = await pool.query(`SELECT * FROM ${this._tableName}`);
 
     return result.rows;
   }
@@ -84,7 +121,7 @@ class UserService {
    */
   async getUsersByRole(role) {
     const result = await pool.query(
-      'SELECT * FROM public.user WHERE "role"=$1',
+      `SELECT * FROM ${this._tableName} WHERE "role"=$1`,
       [role],
     );
 
@@ -101,7 +138,7 @@ class UserService {
    */
   async getUsersByStatus(status) {
     const result = await pool.query(
-      'SELECT * FROM public.user WHERE "status"=$1',
+      `SELECT * FROM ${this._tableName} WHERE "status"=$1`,
       [status],
     );
 
@@ -118,7 +155,7 @@ class UserService {
    */
   async getUsersByStatus(status) {
     const result = await pool.query(
-      'SELECT * FROM public.user WHERE "status"=$1',
+      `SELECT * FROM ${this._tableName} WHERE "status"=$1`,
       [status],
     );
 
@@ -135,7 +172,7 @@ class UserService {
    */
   async getUsersByTransportType(transportType) {
     const result = await pool.query(
-      'SELECT * FROM public.user WHERE "status"=$1',
+      `SELECT * FROM ${this._tableName} WHERE "status"=$1`,
       [transportType],
     );
 

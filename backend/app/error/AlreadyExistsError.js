@@ -7,6 +7,7 @@ export default class AlreadyExistsError extends BaseError {
     message = `Object already exists`,
   ) {
     super(statusCode, message);
+    
     this.name = 'AlreadyExistsError';
   }
 }

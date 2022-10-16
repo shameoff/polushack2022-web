@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import Role from '../utils/Role.js';
 import userService from './user.service.js';
 
 class AuthService {
@@ -8,7 +9,7 @@ class AuthService {
   }
 
   async register(reqBody, role) {
-    if (role) reqBody.role = role;
+    reqBody.role = role ? role : Role.USER;
 
     const user = await userService.create(reqBody);
     user.token = this.generateAccessToken(user.id, user.role);

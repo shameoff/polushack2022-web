@@ -6,6 +6,8 @@ export default class UnexpectedError extends BaseError {
     statusCode = HttpStatus.CONFLICT,
     message = `This error was unexpected`,
   ) {
+    super(statusCode, message);
+
     this.name = 'UnexpectedError';
     this.message = message;
     this.statusCode = statusCode;
